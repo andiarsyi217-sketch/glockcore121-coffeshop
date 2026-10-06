@@ -26,15 +26,69 @@
         <li><a href="contact.html" class="nav-link">Tentang & Kontak</a></li>
       </ul>
 
-      <a href="contact.html" class="nav-cta">
-        <span>Lokasi & Kontak</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="5" y1="12" x2="19" y2="12"></line>
-          <polyline points="12 5 19 12 12 19"></polyline>
-        </svg>
-      </a>
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <button type="button" class="nav-cart-btn open-cart-btn" aria-label="Buka Keranjang">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span>Keranjang</span>
+          <span class="cart-badge">0</span>
+        </button>
+
+        <a href="contact.html" class="nav-cta">
+          <span>Lokasi & Kontak</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
     </div>
   </header>
+
+  <!-- Running Ticker / Marquee Tulisan Berjalan Glockcore 121 -->
+  <div class="marquee-banner" aria-label="Running Text Glockcore 121">
+    <div class="marquee-track">
+      <div class="marquee-group">
+        <span class="marquee-brand">GLOCKCORE 121</span>
+        <span class="marquee-dot">✦</span>
+        <span>HARI YANG TOP DITEMANI KOPI BUATAN GLOCK</span>
+        <span class="marquee-dot">✦</span>
+        <span>ORDER VIA WHATSAPP 0822-9866-3371</span>
+        <span class="marquee-dot">✦</span>
+        <span>AUTHENTIC COFFEE EXPERIENCE</span>
+        <span class="marquee-dot">✦</span>
+        <span>JLN. PONGTIKU LRG 22 NO. 7</span>
+        <span class="marquee-dot">✦</span>
+        <span class="marquee-brand">GLOCKCORE 121</span>
+        <span class="marquee-dot">✦</span>
+        <span>OPEN DAILY 10.00 - 23.00 WITA</span>
+        <span class="marquee-dot">✦</span>
+        <span>13 PILIHAN MENU ISTIMEWA</span>
+        <span class="marquee-dot">✦</span>
+      </div>
+      <div class="marquee-group" aria-hidden="true">
+        <span class="marquee-brand">GLOCKCORE 121</span>
+        <span class="marquee-dot">✦</span>
+        <span>HARI YANG TOP DITEMANI KOPI BUATAN GLOCK</span>
+        <span class="marquee-dot">✦</span>
+        <span>ORDER VIA WHATSAPP 0822-9866-3371</span>
+        <span class="marquee-dot">✦</span>
+        <span>AUTHENTIC COFFEE EXPERIENCE</span>
+        <span class="marquee-dot">✦</span>
+        <span>JLN. PONGTIKU LRG 22 NO. 7</span>
+        <span class="marquee-dot">✦</span>
+        <span class="marquee-brand">GLOCKCORE 121</span>
+        <span class="marquee-dot">✦</span>
+        <span>OPEN DAILY 10.00 - 23.00 WITA</span>
+        <span class="marquee-dot">✦</span>
+        <span>13 PILIHAN MENU ISTIMEWA</span>
+        <span class="marquee-dot">✦</span>
+      </div>
+    </div>
+  </div>
 
   <main class="container">
     <!-- Header Bagian Menu -->
@@ -72,14 +126,21 @@
           </div>
           <p class="menu-caption">Espresso murni dengan air mineral dingin/panas, menghasilkan cita rasa bold, bersih, dan menyegarkan.</p>
           <div class="menu-footer">
-            <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
-            </a>
+            <div class="menu-action-group">
+              <button type="button" class="btn-add-cart" data-name="BLACK MAGz Americano" data-price="13000" data-img="americano.jpeg">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>+ Keranjang</span>
+              </button>
+              <a href="javascript:void(0)" onclick="orderWhatsAppSingle('BLACK MAGz Americano', 13000)" class="btn-order-wa">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+                <span>Pesan WA</span>
+              </a>
+            </div>
           </div>
         </div>
       </article>
@@ -97,14 +158,21 @@
           </div>
           <p class="menu-caption">Perpaduan manis gurih sirup butterscotch berpadu dengan espresso mantap dan susu creamy racikan Glock.</p>
           <div class="menu-footer">
-            <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
-            </a>
+            <div class="menu-action-group">
+              <button type="button" class="btn-add-cart" data-name="Butterscotch" data-price="17000" data-img="butterscooth.jpeg">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>+ Keranjang</span>
+              </button>
+              <a href="javascript:void(0)" onclick="orderWhatsAppSingle('Butterscotch', 17000)" class="btn-order-wa">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+                <span>Pesan WA</span>
+              </a>
+            </div>
           </div>
         </div>
       </article>
@@ -122,14 +190,21 @@
           </div>
           <p class="menu-caption">Lapisan espresso pekat di atas susu vanilla lembut, disempurnakan lelehan saus karamel legit yang memikat.</p>
           <div class="menu-footer">
-            <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
-            </a>
+            <div class="menu-action-group">
+              <button type="button" class="btn-add-cart" data-name="Caramel Machiato" data-price="15000" data-img="caramel mathiato.jpeg">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>+ Keranjang</span>
+              </button>
+              <a href="javascript:void(0)" onclick="orderWhatsAppSingle('Caramel Machiato', 15000)" class="btn-order-wa">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+                <span>Pesan WA</span>
+              </a>
+            </div>
           </div>
         </div>
       </article>
@@ -147,14 +222,21 @@
           </div>
           <p class="menu-caption">Cokelat pekat premium dipadukan susu segar creamy, sensasi rasa manis seimbang yang memanjakan lidah.</p>
           <div class="menu-footer">
-            <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
-            </a>
+            <div class="menu-action-group">
+              <button type="button" class="btn-add-cart" data-name="Chocolate" data-price="12000" data-img="chocolate.jpeg">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>+ Keranjang</span>
+              </button>
+              <a href="javascript:void(0)" onclick="orderWhatsAppSingle('Chocolate', 12000)" class="btn-order-wa">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+                <span>Pesan WA</span>
+              </a>
+            </div>
           </div>
         </div>
       </article>
@@ -172,14 +254,21 @@
           </div>
           <p class="menu-caption">Kombinasi klasik single shot espresso dengan susu kukus bertekstur halus, pas untuk penikmat kopi lembut.</p>
           <div class="menu-footer">
-            <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
-            </a>
+            <div class="menu-action-group">
+              <button type="button" class="btn-add-cart" data-name="Coffee Latte" data-price="13000" data-img="coffe latte.jpeg">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>+ Keranjang</span>
+              </button>
+              <a href="javascript:void(0)" onclick="orderWhatsAppSingle('Coffee Latte', 13000)" class="btn-order-wa">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+                <span>Pesan WA</span>
+              </a>
+            </div>
           </div>
         </div>
       </article>
@@ -197,14 +286,21 @@
           </div>
           <p class="menu-caption">Kopi susu dengan manis legit gula aren asli Nusantara, rasa gurih otentik yang selalu jadi pilihan utama.</p>
           <div class="menu-footer">
-            <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
-            </a>
+            <div class="menu-action-group">
+              <button type="button" class="btn-add-cart" data-name="SWEET MAGz Aren" data-price="13000" data-img="kopi aren.jpeg">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>+ Keranjang</span>
+              </button>
+              <a href="javascript:void(0)" onclick="orderWhatsAppSingle('SWEET MAGz Aren', 13000)" class="btn-order-wa">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+                <span>Pesan WA</span>
+              </a>
+            </div>
           </div>
         </div>
       </article>
@@ -222,14 +318,21 @@
           </div>
           <p class="menu-caption">Kopi susu racikan khas Glock, gurih, seimbang, dan memberikan boost energi maksimal untuk hari Anda.</p>
           <div class="menu-footer">
-            <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
-            </a>
+            <div class="menu-action-group">
+              <button type="button" class="btn-add-cart" data-name="WHITE MAGz Kopi Susu" data-price="13000" data-img="kopi susu.jpeg">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>+ Keranjang</span>
+              </button>
+              <a href="javascript:void(0)" onclick="orderWhatsAppSingle('WHITE MAGz Kopi Susu', 13000)" class="btn-order-wa">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+                <span>Pesan WA</span>
+              </a>
+            </div>
           </div>
         </div>
       </article>
@@ -247,14 +350,21 @@
           </div>
           <p class="menu-caption">Teh dingin segar dengan aroma dan manis buah leci yang wangi, sangat pas dinikmati di cuaca terik.</p>
           <div class="menu-footer">
-            <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
-            </a>
+            <div class="menu-action-group">
+              <button type="button" class="btn-add-cart" data-name="Lychee Tea" data-price="13000" data-img="lecitea.jpeg">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>+ Keranjang</span>
+              </button>
+              <a href="javascript:void(0)" onclick="orderWhatsAppSingle('Lychee Tea', 13000)" class="btn-order-wa">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+                <span>Pesan WA</span>
+              </a>
+            </div>
           </div>
         </div>
       </article>
@@ -272,14 +382,21 @@
           </div>
           <p class="menu-caption">Sari buah lemon segar berpadu dengan seduhan daun teh pilihan, menghadirkan kesegaran asam-manis alami.</p>
           <div class="menu-footer">
-            <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
-            </a>
+            <div class="menu-action-group">
+              <button type="button" class="btn-add-cart" data-name="Lemon Tea" data-price="10000" data-img="lemontea.jpeg">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>+ Keranjang</span>
+              </button>
+              <a href="javascript:void(0)" onclick="orderWhatsAppSingle('Lemon Tea', 10000)" class="btn-order-wa">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+                <span>Pesan WA</span>
+              </a>
+            </div>
           </div>
         </div>
       </article>
@@ -297,14 +414,21 @@
           </div>
           <p class="menu-caption">Bubuk matcha murni kualitas tinggi dipadu susu segar lembut dengan aroma earthy yang menenangkan.</p>
           <div class="menu-footer">
-            <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
-            </a>
+            <div class="menu-action-group">
+              <button type="button" class="btn-add-cart" data-name="Matcha" data-price="12000" data-img="matcha.jpeg">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>+ Keranjang</span>
+              </button>
+              <a href="javascript:void(0)" onclick="orderWhatsAppSingle('Matcha', 12000)" class="btn-order-wa">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+                <span>Pesan WA</span>
+              </a>
+            </div>
           </div>
         </div>
       </article>
@@ -322,14 +446,21 @@
           </div>
           <p class="menu-caption">Minuman cokelat malt Milo favorit racikan spesial Glockcore dengan kekentalan dan rasa cokelat ekstra mantap.</p>
           <div class="menu-footer">
-            <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
-            </a>
+            <div class="menu-action-group">
+              <button type="button" class="btn-add-cart" data-name="Milo" data-price="12000" data-img="milo.jpeg">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>+ Keranjang</span>
+              </button>
+              <a href="javascript:void(0)" onclick="orderWhatsAppSingle('Milo', 12000)" class="btn-order-wa">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+                <span>Pesan WA</span>
+              </a>
+            </div>
           </div>
         </div>
       </article>
@@ -347,14 +478,21 @@
           </div>
           <p class="menu-caption">Aroma wangi daun pandan alami berpadu serasi dengan espresso dan susu gurih, sensasi rasa unik yang nagih.</p>
           <div class="menu-footer">
-            <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
-            </a>
+            <div class="menu-action-group">
+              <button type="button" class="btn-add-cart" data-name="GREEN MAGz Pandan" data-price="15000" data-img="pandan.jpeg">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>+ Keranjang</span>
+              </button>
+              <a href="javascript:void(0)" onclick="orderWhatsAppSingle('GREEN MAGz Pandan', 15000)" class="btn-order-wa">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+                <span>Pesan WA</span>
+              </a>
+            </div>
           </div>
         </div>
       </article>
@@ -372,14 +510,21 @@
           </div>
           <p class="menu-caption">Seduhan daun teh hitam Thailand otentik beraroma rempah khas dipadu susu kental manis creamy yang segar.</p>
           <div class="menu-footer">
-            <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
-            </a>
+            <div class="menu-action-group">
+              <button type="button" class="btn-add-cart" data-name="Thai Tea" data-price="12000" data-img="thaitea.jpeg">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>+ Keranjang</span>
+              </button>
+              <a href="javascript:void(0)" onclick="orderWhatsAppSingle('Thai Tea', 12000)" class="btn-order-wa">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+                <span>Pesan WA</span>
+              </a>
+            </div>
           </div>
         </div>
       </article>
@@ -390,7 +535,7 @@
     <section class="page-nav-banner">
       <div class="page-nav-text">
         <h3>Mau Kunjungi Kedai Kami?</h3>
-        <p>Lihat alamat lengkap di Jln. Pongtiku Lrg 22 No. 7 atau pesan lewat akun resmi Instagram kami.</p>
+        <p>Lihat alamat lengkap di Jln. Pongtiku Lrg 22 No. 7 atau pesan langsung lewat WhatsApp kami di 0822-9866-3371.</p>
       </div>
       <div class="page-nav-buttons">
         <a href="index.html" class="btn btn-outline">
@@ -400,16 +545,68 @@
           </svg>
           <span>Kembali ke Beranda</span>
         </a>
-        <a href="contact.html" class="btn btn-primary">
-          <span>Lokasi & Kontak Glock</span>
+        <a href="https://wa.me/6282298663371?text=Halo%20Glockcore%20121%2C%20saya%20ingin%20bertanya%20menu" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="background: #25d366; color: #000; border-color: #25d366;">
+          <span>Chat WhatsApp Glock</span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
           </svg>
         </a>
       </div>
     </section>
   </main>
+
+  <!-- Floating Cart Toggle Button -->
+  <button type="button" class="floating-cart-toggle open-cart-btn" aria-label="Lihat Keranjang Belanja">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="9" cy="21" r="1"></circle>
+      <circle cx="20" cy="21" r="1"></circle>
+      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+    </svg>
+    <span>Keranjang</span>
+    <span class="cart-badge">0</span>
+  </button>
+
+  <!-- Cart Overlay & Slide Drawer -->
+  <div id="cartOverlay" class="cart-overlay"></div>
+  <aside id="cartDrawer" class="cart-drawer" aria-label="Keranjang Belanja Glockcore 121">
+    <div class="cart-header">
+      <div class="cart-title">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <span>Keranjang Belanja</span>
+      </div>
+      <button type="button" id="cartCloseBtn" class="cart-close-btn" aria-label="Tutup Keranjang">✕</button>
+    </div>
+
+    <div id="cartItemsBody" class="cart-items-body">
+      <!-- Items dynamically populated by script.js -->
+    </div>
+
+    <div class="cart-footer">
+      <label for="cartNotes" style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 0.4rem;">
+        Catatan Tambahan (Misal: Less Sugar, Es Pisah):
+      </label>
+      <input type="text" id="cartNotes" class="cart-notes-input" placeholder="Tulis catatan pesanan Anda di sini...">
+
+      <div class="cart-subtotal-row">
+        <span style="color: var(--text-muted);">Total Belanja:</span>
+        <span id="cartTotalPrice" class="cart-total-price">Rp 0</span>
+      </div>
+
+      <button type="button" id="checkoutWaBtn" class="btn-checkout-wa" disabled>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+        </svg>
+        <span>Checkout via WhatsApp</span>
+      </button>
+      <p style="text-align: center; font-size: 0.75rem; color: var(--text-subtle); margin-top: 0.6rem;">
+        Pemesanan akan langsung diarahkan ke nomor 0822-9866-3371
+      </p>
+    </div>
+  </aside>
 
   <!-- Footer -->
   <footer class="footer">
@@ -437,6 +634,7 @@
           <ul>
             <li>📍 Jln. Pongtiku Lrg 22 No. 7</li>
             <li>⏰ 10.00 - 23.00 WITA Setiap Hari</li>
+            <li>💬 WhatsApp: <a href="https://wa.me/6282298663371" target="_blank" rel="noopener noreferrer">0822-9866-3371</a></li>
             <li>📸 Instagram: <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer">@glockcore.121</a></li>
           </ul>
         </div>
