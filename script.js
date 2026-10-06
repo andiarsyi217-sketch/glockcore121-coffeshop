@@ -92,9 +92,36 @@ function formatRupiah(num) {
   return 'Rp ' + Number(num).toLocaleString('id-ID');
 }
 
+function getFormattedDateTime() {
+  const now = new Date();
+  const options = { 
+    day: 'numeric', 
+    month: 'short', 
+    year: 'numeric', 
+    hour: '2-digit', 
+    minute: '2-digit' 
+  };
+  return now.toLocaleDateString('id-ID', options) + ' WITA';
+}
+
 function orderWhatsAppSingle(itemName, price) {
-  const text = `Halo Glockcore 121, saya ingin memesan:\n- *${itemName}* (${formatRupiah(price)})\n\nApakah stok tersedia? Mohon info total dan pembayarannya. Terima kasih!`;
-  const url = `https://wa.me/${GLOCK_WA_NUMBER}?text=${encodeURIComponent(text)}`;
+  let message = `*HALO GLOCKCORE 121, SAYA INGIN PESAN SEKARANG!*\n`;
+  message += `━━━━━━━━━━━━━━━━━━━━━\n`;
+  message += `☕ *Detail Menu:*\n`;
+  message += `   • *Item:* ${itemName}\n`;
+  message += `   • *Jumlah:* 1 cup\n`;
+  message += `   • *Harga:* ${formatRupiah(price)}\n`;
+  message += `━━━━━━━━━━━━━━━━━━━━━\n`;
+  message += `💰 *Total Tagihan:* *${formatRupiah(price)}*\n`;
+  message += `🕒 *Waktu Pesan:* ${getFormattedDateTime()}\n`;
+  message += `━━━━━━━━━━━━━━━━━━━━━\n`;
+  message += `📝 *Data Pemesan:*\n`;
+  message += `   • Nama: \n`;
+  message += `   • Jenis Order: (Dine-in / Take Away / Delivery)\n`;
+  message += `   • Catatan / Varian Suhu: (Dingin / Panas / Normal Sugar)\n\n`;
+  message += `Mohon konfirmasi pesanan dan ketersediaan stok ya. Terima kasih! 🙏`;
+
+  const url = `https://wa.me/${GLOCK_WA_NUMBER}?text=${encodeURIComponent(message)}`;
   window.open(url, '_blank');
 }
 
@@ -249,24 +276,36 @@ const Cart = {
   checkoutWhatsApp() {
     const items = this.getItems();
     if (items.length === 0) {
-      alert('Keranjang belanja Anda masih kosong!');
+      alert('Keranjang belanja Anda masih kosong! Silakan pilih menu terlebih dahulu.');
       return;
     }
 
+    const customerName = $('#cartCustomerName').length ? $('#cartCustomerName').val().trim() : '';
+    const orderType = $('#cartOrderType').length ? $('#cartOrderType').val() : 'Dine In / Take Away';
     const notes = $('#cartNotes').val().trim();
     const totalPrice = this.getTotal();
+    const totalQty = this.getTotalCount();
 
     let message = `*PESANAN BARU - GLOCKCORE 121*\n`;
-    message += `──────────────────────\n`;
+    message += `━━━━━━━━━━━━━━━━━━━━━\n`;
+    message += `👤 *Nama Pemesan:* ${customerName ? customerName : '(Belum diisi)'}\n`;
+    message += `🛵 *Jenis Pesanan:* ${orderType}\n`;
+    message += `🕒 *Waktu:* ${getFormattedDateTime()}\n`;
+    message += `━━━━━━━━━━━━━━━━━━━━━\n`;
+    message += `📋 *Rincian Menu (${totalQty} item):*\n`;
+
     items.forEach((item, idx) => {
-      message += `${idx + 1}. *${item.name}*\n   ${item.qty}x @ ${formatRupiah(item.price)} = ${formatRupiah(item.price * item.qty)}\n`;
+      message += `${idx + 1}. *${item.name}*\n`;
+      message += `   └ ${item.qty} cup × ${formatRupiah(item.price)} = *${formatRupiah(item.price * item.qty)}*\n`;
     });
-    message += `──────────────────────\n`;
-    message += `*Total Pembayaran: ${formatRupiah(totalPrice)}*\n`;
+
+    message += `━━━━━━━━━━━━━━━━━━━━━\n`;
+    message += `💰 *TOTAL PEMBAYARAN:* *${formatRupiah(totalPrice)}*\n`;
     if (notes) {
-      message += `*Catatan Khusus:* ${notes}\n`;
+      message += `📝 *Catatan Khusus:* ${notes}\n`;
     }
-    message += `\nMohon konfirmasi pesanan dan ketersediaan menu. Terima kasih!`;
+    message += `━━━━━━━━━━━━━━━━━━━━━\n\n`;
+    message += `Halo Admin Glockcore 121, mohon konfirmasi pesanan di atas dan ketersediaannya. Terima kasih! 🙏`;
 
     const waUrl = `https://wa.me/${GLOCK_WA_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(waUrl, '_blank');
