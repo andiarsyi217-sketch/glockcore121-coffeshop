@@ -36,6 +36,48 @@
     </div>
   </header>
 
+  <!-- Running Ticker / Marquee Tulisan Berjalan Glockcore 121 -->
+  <div class="marquee-banner" aria-label="Running Text Glockcore 121">
+    <div class="marquee-track">
+      <div class="marquee-group">
+        <span class="marquee-brand">GLOCKCORE 121</span>
+        <span class="marquee-dot">✦</span>
+        <span>HARI YANG TOP DITEMANI KOPI BUATAN GLOCK</span>
+        <span class="marquee-dot">✦</span>
+        <span>AUTHENTIC COFFEE EXPERIENCE</span>
+        <span class="marquee-dot">✦</span>
+        <span>JLN. PONGTIKU LRG 22 NO. 7</span>
+        <span class="marquee-dot">✦</span>
+        <span class="marquee-brand">GLOCKCORE 121</span>
+        <span class="marquee-dot">✦</span>
+        <span>OPEN DAILY 10.00 - 23.00 WITA</span>
+        <span class="marquee-dot">✦</span>
+        <span>13 PILIHAN MENU ISTIMEWA</span>
+        <span class="marquee-dot">✦</span>
+        <span>ORDER VIA INSTAGRAM @GLOCKCORE.121</span>
+        <span class="marquee-dot">✦</span>
+      </div>
+      <div class="marquee-group" aria-hidden="true">
+        <span class="marquee-brand">GLOCKCORE 121</span>
+        <span class="marquee-dot">✦</span>
+        <span>HARI YANG TOP DITEMANI KOPI BUATAN GLOCK</span>
+        <span class="marquee-dot">✦</span>
+        <span>AUTHENTIC COFFEE EXPERIENCE</span>
+        <span class="marquee-dot">✦</span>
+        <span>JLN. PONGTIKU LRG 22 NO. 7</span>
+        <span class="marquee-dot">✦</span>
+        <span class="marquee-brand">GLOCKCORE 121</span>
+        <span class="marquee-dot">✦</span>
+        <span>OPEN DAILY 10.00 - 23.00 WITA</span>
+        <span class="marquee-dot">✦</span>
+        <span>13 PILIHAN MENU ISTIMEWA</span>
+        <span class="marquee-dot">✦</span>
+        <span>ORDER VIA INSTAGRAM @GLOCKCORE.121</span>
+        <span class="marquee-dot">✦</span>
+      </div>
+    </div>
+  </div>
+
   <main class="container">
     <!-- Header Bagian Menu -->
     <section class="page-header">
@@ -59,8 +101,7 @@
     <!-- Grid 13 Bingkai Menu -->
     <section class="menu-grid" id="menuGrid">
 
-      <!-- 1. Americano -->
-      <article class="menu-frame" data-category="coffee">
+      <article class="menu-frame" data-category="coffee" data-menu-id="1" data-menu-nama="BLACK MAGz Americano" data-menu-harga="13000">
         <div class="menu-img-wrap">
           <img src="americano.jpeg" alt="Americano Glockcore 121" class="menu-img" loading="lazy">
           <span class="menu-category-tag">Coffee</span>
@@ -72,20 +113,20 @@
           </div>
           <p class="menu-caption">Espresso murni dengan air mineral dingin/panas, menghasilkan cita rasa bold, bersih, dan menyegarkan.</p>
           <div class="menu-footer">
+            <button class="btn-order-item btn-pesan-now" onclick="bukaModalPesan(this)">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+              <span>Pesan Sekarang</span>
+            </button>
             <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              <span>Instagram</span>
             </a>
           </div>
         </div>
       </article>
 
       <!-- 2. Butterscotch -->
-      <article class="menu-frame" data-category="coffee">
+      <article class="menu-frame" data-category="coffee" data-menu-id="2" data-menu-nama="Butterscotch" data-menu-harga="17000">
         <div class="menu-img-wrap">
           <img src="butterscooth.jpeg" alt="Butterscotch Glockcore 121" class="menu-img" loading="lazy">
           <span class="menu-category-tag">Coffee</span>
@@ -97,20 +138,20 @@
           </div>
           <p class="menu-caption">Perpaduan manis gurih sirup butterscotch berpadu dengan espresso mantap dan susu creamy racikan Glock.</p>
           <div class="menu-footer">
+            <button class="btn-order-item btn-pesan-now" onclick="bukaModalPesan(this)">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+              <span>Pesan Sekarang</span>
+            </button>
             <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              <span>Instagram</span>
             </a>
           </div>
         </div>
       </article>
 
       <!-- 3. Caramel Macchiato -->
-      <article class="menu-frame" data-category="coffee">
+      <article class="menu-frame" data-category="coffee" data-menu-id="3" data-menu-nama="Caramel Machiato" data-menu-harga="15000">
         <div class="menu-img-wrap">
           <img src="caramel mathiato.jpeg" alt="Caramel Macchiato Glockcore 121" class="menu-img" loading="lazy">
           <span class="menu-category-tag">Coffee</span>
@@ -122,20 +163,20 @@
           </div>
           <p class="menu-caption">Lapisan espresso pekat di atas susu vanilla lembut, disempurnakan lelehan saus karamel legit yang memikat.</p>
           <div class="menu-footer">
+            <button class="btn-order-item btn-pesan-now" onclick="bukaModalPesan(this)">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+              <span>Pesan Sekarang</span>
+            </button>
             <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              <span>Instagram</span>
             </a>
           </div>
         </div>
       </article>
 
       <!-- 4. Chocolate -->
-      <article class="menu-frame" data-category="non-coffee">
+      <article class="menu-frame" data-category="non-coffee" data-menu-id="4" data-menu-nama="Chocolate" data-menu-harga="12000">
         <div class="menu-img-wrap">
           <img src="chocolate.jpeg" alt="Chocolate Glockcore 121" class="menu-img" loading="lazy">
           <span class="menu-category-tag">Non-Coffee</span>
@@ -147,20 +188,20 @@
           </div>
           <p class="menu-caption">Cokelat pekat premium dipadukan susu segar creamy, sensasi rasa manis seimbang yang memanjakan lidah.</p>
           <div class="menu-footer">
+            <button class="btn-order-item btn-pesan-now" onclick="bukaModalPesan(this)">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+              <span>Pesan Sekarang</span>
+            </button>
             <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              <span>Instagram</span>
             </a>
           </div>
         </div>
       </article>
 
       <!-- 5. Coffee Latte -->
-      <article class="menu-frame" data-category="coffee">
+      <article class="menu-frame" data-category="coffee" data-menu-id="5" data-menu-nama="Coffee Latte" data-menu-harga="13000">
         <div class="menu-img-wrap">
           <img src="coffe latte.jpeg" alt="Coffee Latte Glockcore 121" class="menu-img" loading="lazy">
           <span class="menu-category-tag">Coffee</span>
@@ -172,20 +213,20 @@
           </div>
           <p class="menu-caption">Kombinasi klasik single shot espresso dengan susu kukus bertekstur halus, pas untuk penikmat kopi lembut.</p>
           <div class="menu-footer">
+            <button class="btn-order-item btn-pesan-now" onclick="bukaModalPesan(this)">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+              <span>Pesan Sekarang</span>
+            </button>
             <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              <span>Instagram</span>
             </a>
           </div>
         </div>
       </article>
 
       <!-- 6. Kopi Aren -->
-      <article class="menu-frame" data-category="coffee">
+      <article class="menu-frame" data-category="coffee" data-menu-id="6" data-menu-nama="SWEET MAGz Aren" data-menu-harga="13000">
         <div class="menu-img-wrap">
           <img src="kopi aren.jpeg" alt="Kopi Aren Glockcore 121" class="menu-img" loading="lazy">
           <span class="menu-category-tag">Coffee</span>
@@ -197,20 +238,20 @@
           </div>
           <p class="menu-caption">Kopi susu dengan manis legit gula aren asli Nusantara, rasa gurih otentik yang selalu jadi pilihan utama.</p>
           <div class="menu-footer">
+            <button class="btn-order-item btn-pesan-now" onclick="bukaModalPesan(this)">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+              <span>Pesan Sekarang</span>
+            </button>
             <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              <span>Instagram</span>
             </a>
           </div>
         </div>
       </article>
 
       <!-- 7. Kopi Susu -->
-      <article class="menu-frame" data-category="coffee">
+      <article class="menu-frame" data-category="coffee" data-menu-id="7" data-menu-nama="Kopi Susu" data-menu-harga="13000">
         <div class="menu-img-wrap">
           <img src="kopi susu.jpeg" alt="Kopi Susu Glockcore 121" class="menu-img" loading="lazy">
           <span class="menu-category-tag">Coffee</span>
@@ -222,20 +263,20 @@
           </div>
           <p class="menu-caption">Kopi susu racikan khas Glock, gurih, seimbang, dan memberikan boost energi maksimal untuk hari Anda.</p>
           <div class="menu-footer">
+            <button class="btn-order-item btn-pesan-now" onclick="bukaModalPesan(this)">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+              <span>Pesan Sekarang</span>
+            </button>
             <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              <span>Instagram</span>
             </a>
           </div>
         </div>
       </article>
 
       <!-- 8. Lychee Tea -->
-      <article class="menu-frame" data-category="tea">
+      <article class="menu-frame" data-category="tea" data-menu-id="10" data-menu-nama="Leci Tea" data-menu-harga="12000">
         <div class="menu-img-wrap">
           <img src="lecitea.jpeg" alt="Lychee Tea Glockcore 121" class="menu-img" loading="lazy">
           <span class="menu-category-tag">Tea Series</span>
@@ -247,20 +288,20 @@
           </div>
           <p class="menu-caption">Teh dingin segar dengan aroma dan manis buah leci yang wangi, sangat pas dinikmati di cuaca terik.</p>
           <div class="menu-footer">
+            <button class="btn-order-item btn-pesan-now" onclick="bukaModalPesan(this)">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+              <span>Pesan Sekarang</span>
+            </button>
             <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              <span>Instagram</span>
             </a>
           </div>
         </div>
       </article>
 
       <!-- 9. Lemon Tea -->
-      <article class="menu-frame" data-category="tea">
+      <article class="menu-frame" data-category="tea" data-menu-id="11" data-menu-nama="Lemon Tea" data-menu-harga="12000">
         <div class="menu-img-wrap">
           <img src="lemontea.jpeg" alt="Lemon Tea Glockcore 121" class="menu-img" loading="lazy">
           <span class="menu-category-tag">Tea Series</span>
@@ -272,20 +313,20 @@
           </div>
           <p class="menu-caption">Sari buah lemon segar berpadu dengan seduhan daun teh pilihan, menghadirkan kesegaran asam-manis alami.</p>
           <div class="menu-footer">
+            <button class="btn-order-item btn-pesan-now" onclick="bukaModalPesan(this)">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+              <span>Pesan Sekarang</span>
+            </button>
             <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              <span>Instagram</span>
             </a>
           </div>
         </div>
       </article>
 
       <!-- 10. Matcha -->
-      <article class="menu-frame" data-category="non-coffee">
+      <article class="menu-frame" data-category="non-coffee" data-menu-id="8" data-menu-nama="Matcha Latte" data-menu-harga="15000">
         <div class="menu-img-wrap">
           <img src="matcha.jpeg" alt="Matcha Latte Glockcore 121" class="menu-img" loading="lazy">
           <span class="menu-category-tag">Non-Coffee</span>
@@ -297,20 +338,20 @@
           </div>
           <p class="menu-caption">Bubuk matcha murni kualitas tinggi dipadu susu segar lembut dengan aroma earthy yang menenangkan.</p>
           <div class="menu-footer">
+            <button class="btn-order-item btn-pesan-now" onclick="bukaModalPesan(this)">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+              <span>Pesan Sekarang</span>
+            </button>
             <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              <span>Instagram</span>
             </a>
           </div>
         </div>
       </article>
 
       <!-- 11. Milo -->
-      <article class="menu-frame" data-category="non-coffee">
+      <article class="menu-frame" data-category="non-coffee" data-menu-id="12" data-menu-nama="Milo" data-menu-harga="12000">
         <div class="menu-img-wrap">
           <img src="milo.jpeg" alt="Milo Glock Glockcore 121" class="menu-img" loading="lazy">
           <span class="menu-category-tag">Non-Coffee</span>
@@ -322,20 +363,20 @@
           </div>
           <p class="menu-caption">Minuman cokelat malt Milo favorit racikan spesial Glockcore dengan kekentalan dan rasa cokelat ekstra mantap.</p>
           <div class="menu-footer">
+            <button class="btn-order-item btn-pesan-now" onclick="bukaModalPesan(this)">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+              <span>Pesan Sekarang</span>
+            </button>
             <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              <span>Instagram</span>
             </a>
           </div>
         </div>
       </article>
 
       <!-- 12. Pandan -->
-      <article class="menu-frame" data-category="coffee">
+      <article class="menu-frame" data-category="coffee" data-menu-id="9" data-menu-nama="Pandan Latte" data-menu-harga="14000">
         <div class="menu-img-wrap">
           <img src="pandan.jpeg" alt="Kopi Pandan Glockcore 121" class="menu-img" loading="lazy">
           <span class="menu-category-tag">Coffee</span>
@@ -347,20 +388,20 @@
           </div>
           <p class="menu-caption">Aroma wangi daun pandan alami berpadu serasi dengan espresso dan susu gurih, sensasi rasa unik yang nagih.</p>
           <div class="menu-footer">
+            <button class="btn-order-item btn-pesan-now" onclick="bukaModalPesan(this)">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+              <span>Pesan Sekarang</span>
+            </button>
             <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              <span>Instagram</span>
             </a>
           </div>
         </div>
       </article>
 
       <!-- 13. Thai Tea -->
-      <article class="menu-frame" data-category="tea">
+      <article class="menu-frame" data-category="tea" data-menu-id="13" data-menu-nama="Thai Tea" data-menu-harga="13000">
         <div class="menu-img-wrap">
           <img src="thaitea.jpeg" alt="Thai Tea Glockcore 121" class="menu-img" loading="lazy">
           <span class="menu-category-tag">Tea Series</span>
@@ -372,13 +413,13 @@
           </div>
           <p class="menu-caption">Seduhan daun teh hitam Thailand otentik beraroma rempah khas dipadu susu kental manis creamy yang segar.</p>
           <div class="menu-footer">
+            <button class="btn-order-item btn-pesan-now" onclick="bukaModalPesan(this)">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+              <span>Pesan Sekarang</span>
+            </button>
             <a href="https://www.instagram.com/glockcore.121" target="_blank" rel="noopener noreferrer" class="btn-order-item">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-              <span>Pesan via Instagram</span>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              <span>Instagram</span>
             </a>
           </div>
         </div>
@@ -455,5 +496,112 @@
 
   <!-- Main Custom Script -->
   <script src="script.js"></script>
+  <!-- Modal Form Pesanan -->
+  <div id="modal-pesan" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:9999; align-items:center; justify-content:center; padding:1rem;">
+    <div style="background:#111; border:1px solid #2a2a2a; border-radius:16px; padding:2rem; max-width:480px; width:100%; position:relative; max-height:90vh; overflow-y:auto;">
+      <button onclick="tutupModal()" style="position:absolute; top:1rem; right:1rem; background:none; border:none; color:#666; font-size:1.5rem; cursor:pointer;">&#x2715;</button>
+      <h3 style="font-size:1.2rem; font-weight:800; color:#fff; margin-bottom:0.3rem;">Pesan Menu</h3>
+      <p id="modal-menu-nama" style="color:#888; font-size:0.9rem; margin-bottom:1.5rem;"></p>
+      <div id="modal-alert" style="display:none; padding:10px 14px; border-radius:8px; margin-bottom:1rem; font-size:0.88rem; font-weight:500;"></div>
+      <form id="form-pesan">
+        <input type="hidden" id="p-menu-id">
+        <div style="margin-bottom:1rem;">
+          <label style="display:block; color:#666; font-size:0.78rem; margin-bottom:5px; text-transform:uppercase; letter-spacing:0.05em;">Nama Lengkap *</label>
+          <input type="text" id="p-nama" placeholder="Nama pemesan..." style="width:100%; background:#191919; border:1px solid #2a2a2a; border-radius:8px; padding:10px 14px; color:#fff; font-size:0.9rem; outline:none;">
+        </div>
+        <div style="margin-bottom:1rem;">
+          <label style="display:block; color:#666; font-size:0.78rem; margin-bottom:5px; text-transform:uppercase; letter-spacing:0.05em;">Nomor HP / WhatsApp *</label>
+          <input type="tel" id="p-nohp" placeholder="08xxxxxxxxxx" style="width:100%; background:#191919; border:1px solid #2a2a2a; border-radius:8px; padding:10px 14px; color:#fff; font-size:0.9rem; outline:none;">
+        </div>
+        <div style="margin-bottom:1rem;">
+          <label style="display:block; color:#666; font-size:0.78rem; margin-bottom:5px; text-transform:uppercase; letter-spacing:0.05em;">Jumlah *</label>
+          <input type="number" id="p-jumlah" value="1" min="1" max="20" style="width:100%; background:#191919; border:1px solid #2a2a2a; border-radius:8px; padding:10px 14px; color:#fff; font-size:0.9rem; outline:none;">
+        </div>
+        <div style="margin-bottom:1.5rem;">
+          <label style="display:block; color:#666; font-size:0.78rem; margin-bottom:5px; text-transform:uppercase; letter-spacing:0.05em;">Catatan (opsional)</label>
+          <textarea id="p-catatan" rows="2" placeholder="Contoh: es banyak, less sugar, dll..." style="width:100%; background:#191919; border:1px solid #2a2a2a; border-radius:8px; padding:10px 14px; color:#fff; font-size:0.9rem; outline:none; resize:vertical;"></textarea>
+        </div>
+        <div style="background:#191919; border:1px solid #2a2a2a; border-radius:8px; padding:12px 16px; margin-bottom:1.2rem; display:flex; justify-content:space-between; align-items:center;">
+          <span style="color:#888; font-size:0.88rem;">Estimasi Total</span>
+          <span id="total-harga" style="color:#fff; font-weight:800; font-size:1.1rem;">Rp 0</span>
+        </div>
+        <button type="submit" id="btn-submit-pesan" style="width:100%; background:#fff; color:#000; border:none; border-radius:10px; padding:12px; font-size:1rem; font-weight:800; cursor:pointer;">
+          <span id="btn-pesan-text">Konfirmasi Pesanan</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+  var hargaMenu = 0;
+  function bukaModalPesan(btn) {
+    var article = $(btn).closest('[data-menu-id]');
+    hargaMenu = parseInt(article.data('menu-harga')) || 0;
+    $('#p-menu-id').val(article.data('menu-id'));
+    $('#modal-menu-nama').text(article.data('menu-nama') + '  \u2014  Rp ' + formatRupiah(hargaMenu));
+    $('#p-jumlah').val(1);
+    $('#total-harga').text('Rp ' + formatRupiah(hargaMenu));
+    $('#modal-alert').hide();
+    $('#p-nama, #p-nohp, #p-catatan').val('');
+    $('#modal-pesan').css('display', 'flex');
+    $('body').css('overflow', 'hidden');
+  }
+  function tutupModal() {
+    $('#modal-pesan').hide();
+    $('body').css('overflow', '');
+  }
+  $(document).on('input', '#p-jumlah', function() {
+    $('#total-harga').text('Rp ' + formatRupiah(hargaMenu * (parseInt($(this).val()) || 1)));
+  });
+  $('#modal-pesan').on('click', function(e) { if ($(e.target).is('#modal-pesan')) tutupModal(); });
+  $(document).on('keydown', function(e) { if (e.key === 'Escape') tutupModal(); });
+  $('#form-pesan').on('submit', function(e) {
+    e.preventDefault();
+    var nama = $('#p-nama').val().trim(), noHp = $('#p-nohp').val().trim();
+    if (!nama || !noHp) { showModalAlert('Nama dan nomor HP wajib diisi!', false); return; }
+    $('#btn-pesan-text').text('Memproses...');
+    $('#btn-submit-pesan').prop('disabled', true);
+    $.ajax({
+      url: 'api/submit_pesanan.php', method: 'POST', contentType: 'application/json',
+      data: JSON.stringify({ menu_id: $('#p-menu-id').val(), nama: nama, no_hp: noHp, jumlah: parseInt($('#p-jumlah').val()) || 1, catatan: $('#p-catatan').val().trim() }),
+      success: function(res) {
+        if (res.success && res.wa_url) {
+          var alertHtml = '<strong>Pesanan Berhasil Disimpan (#' + res.pesanan_id + ')!</strong><br>'
+                        + '<span style="font-size:0.85rem">Membuka WhatsApp penjual... Jika tidak terbuka otomatis, klik tombol di bawah:</span><br>'
+                        + '<a href="' + res.wa_url + '" target="_blank" style="display:inline-flex; align-items:center; gap:6px; margin-top:8px; background:#25D366; color:#fff; font-weight:700; text-decoration:none; padding:8px 14px; border-radius:6px; font-size:0.85rem;">'
+                        + '💬 Buka Chat WhatsApp'
+                        + '</a>';
+          showModalAlert(alertHtml, true, true);
+          $('#p-nama,#p-nohp,#p-catatan').val('');
+
+          // Otomatis arahkan ke WhatsApp
+          setTimeout(function() {
+            window.open(res.wa_url, '_blank');
+          }, 600);
+
+          setTimeout(tutupModal, 6000);
+        } else {
+          showModalAlert(res.message, true);
+          $('#p-nama,#p-nohp,#p-catatan').val('');
+          setTimeout(tutupModal, 4000);
+        }
+      },
+      error: function(xhr) { showModalAlert(xhr.responseJSON ? xhr.responseJSON.message : 'Gagal. Coba lagi.', false); },
+      complete: function() { $('#btn-pesan-text').text('Konfirmasi Pesanan'); $('#btn-submit-pesan').prop('disabled', false); }
+    });
+  });
+  function showModalAlert(msg, ok, isHtml) {
+    var $alert = $('#modal-alert');
+    $alert.css({ background: ok?'#052e16':'#450a0a', border: ok?'1px solid #166534':'1px solid #991b1b', color: ok?'#4ade80':'#fca5a5' });
+    if (isHtml) {
+      $alert.html(msg).fadeIn(200);
+    } else {
+      $alert.html((ok?'&#10003; ':'&#10007; ')+msg).fadeIn(200);
+    }
+  }
+  function formatRupiah(n) { return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+  </script>
 </body>
 </html>
+
+

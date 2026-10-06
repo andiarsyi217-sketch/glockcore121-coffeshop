@@ -36,6 +36,48 @@
     </div>
   </header>
 
+  <!-- Running Ticker / Marquee Tulisan Berjalan Glockcore 121 -->
+  <div class="marquee-banner" aria-label="Running Text Glockcore 121">
+    <div class="marquee-track">
+      <div class="marquee-group">
+        <span class="marquee-brand">GLOCKCORE 121</span>
+        <span class="marquee-dot">✦</span>
+        <span>HARI YANG TOP DITEMANI KOPI BUATAN GLOCK</span>
+        <span class="marquee-dot">✦</span>
+        <span>AUTHENTIC COFFEE EXPERIENCE</span>
+        <span class="marquee-dot">✦</span>
+        <span>JLN. PONGTIKU LRG 22 NO. 7</span>
+        <span class="marquee-dot">✦</span>
+        <span class="marquee-brand">GLOCKCORE 121</span>
+        <span class="marquee-dot">✦</span>
+        <span>OPEN DAILY 10.00 - 23.00 WITA</span>
+        <span class="marquee-dot">✦</span>
+        <span>13 PILIHAN MENU ISTIMEWA</span>
+        <span class="marquee-dot">✦</span>
+        <span>ORDER VIA INSTAGRAM @GLOCKCORE.121</span>
+        <span class="marquee-dot">✦</span>
+      </div>
+      <div class="marquee-group" aria-hidden="true">
+        <span class="marquee-brand">GLOCKCORE 121</span>
+        <span class="marquee-dot">✦</span>
+        <span>HARI YANG TOP DITEMANI KOPI BUATAN GLOCK</span>
+        <span class="marquee-dot">✦</span>
+        <span>AUTHENTIC COFFEE EXPERIENCE</span>
+        <span class="marquee-dot">✦</span>
+        <span>JLN. PONGTIKU LRG 22 NO. 7</span>
+        <span class="marquee-dot">✦</span>
+        <span class="marquee-brand">GLOCKCORE 121</span>
+        <span class="marquee-dot">✦</span>
+        <span>OPEN DAILY 10.00 - 23.00 WITA</span>
+        <span class="marquee-dot">✦</span>
+        <span>13 PILIHAN MENU ISTIMEWA</span>
+        <span class="marquee-dot">✦</span>
+        <span>ORDER VIA INSTAGRAM @GLOCKCORE.121</span>
+        <span class="marquee-dot">✦</span>
+      </div>
+    </div>
+  </div>
+
   <main class="container">
     <!-- Header Halaman Kontak -->
     <section class="page-header">
@@ -179,6 +221,56 @@
 
     </section>
 
+    <!-- Form Kirim Pesan / Kontak -->
+    <section style="margin-bottom: 3rem;">
+      <div class="info-card" style="max-width: 700px; margin: 0 auto;">
+        <div class="info-header">
+          <div class="info-header-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </div>
+          <div>
+            <h2 class="info-title">Kirim Pesan ke Kami</h2>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">Ada pertanyaan atau saran? Kami senang mendengarnya!</p>
+          </div>
+        </div>
+        <div id="kontak-alert" style="display:none; padding: 12px 16px; border-radius: 8px; margin-bottom: 1.2rem; font-size: 0.9rem; font-weight: 500;"></div>
+        <form id="form-kontak">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+            <div>
+              <label style="display:block; color: var(--text-muted); font-size:0.82rem; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.05em;">Nama Lengkap *</label>
+              <input type="text" id="k-nama" placeholder="Nama kamu..." required
+                style="width:100%; background:#191919; border:1px solid var(--border-subtle); border-radius:8px; padding:10px 14px; color:var(--white); font-size:0.95rem; outline:none;">
+            </div>
+            <div>
+              <label style="display:block; color: var(--text-muted); font-size:0.82rem; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.05em;">Email *</label>
+              <input type="email" id="k-email" placeholder="email@kamu.com" required
+                style="width:100%; background:#191919; border:1px solid var(--border-subtle); border-radius:8px; padding:10px 14px; color:var(--white); font-size:0.95rem; outline:none;">
+            </div>
+          </div>
+          <div style="margin-bottom: 1rem;">
+            <label style="display:block; color: var(--text-muted); font-size:0.82rem; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.05em;">Subjek *</label>
+            <input type="text" id="k-subjek" placeholder="Pertanyaan tentang menu, lokasi, dll..." required
+              style="width:100%; background:#191919; border:1px solid var(--border-subtle); border-radius:8px; padding:10px 14px; color:var(--white); font-size:0.95rem; outline:none;">
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display:block; color: var(--text-muted); font-size:0.82rem; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.05em;">Pesan *</label>
+            <textarea id="k-pesan" rows="4" placeholder="Tulis pesanmu di sini..." required
+              style="width:100%; background:#191919; border:1px solid var(--border-subtle); border-radius:8px; padding:10px 14px; color:var(--white); font-size:0.95rem; outline:none; resize:vertical;"></textarea>
+          </div>
+          <button type="submit" id="btn-kirim-kontak" class="btn btn-primary" style="width:100%; justify-content:center;">
+            <span id="btn-kontak-text">Kirim Pesan</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </section>
+
     <!-- Navigasi Bawah -->
     <section class="page-nav-banner">
       <div class="page-nav-text">
@@ -248,5 +340,54 @@
 
   <!-- Main Custom Script -->
   <script src="script.js"></script>
+
+  <!-- Script Form Kontak (AJAX ke Database) -->
+  <script>
+  $('#form-kontak').on('submit', function(e) {
+    e.preventDefault();
+    var nama   = $('#k-nama').val().trim();
+    var email  = $('#k-email').val().trim();
+    var subjek = $('#k-subjek').val().trim();
+    var pesan  = $('#k-pesan').val().trim();
+
+    if (!nama || !email || !subjek || !pesan) {
+      showKontakAlert('Semua field wajib diisi!', false);
+      return;
+    }
+
+    $('#btn-kontak-text').text('Mengirim...');
+    $('#btn-kirim-kontak').prop('disabled', true);
+
+    $.ajax({
+      url: 'api/submit_kontak.php',
+      method: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({ nama: nama, email: email, subjek: subjek, pesan: pesan }),
+      success: function(res) {
+        showKontakAlert(res.message, true);
+        $('#form-kontak')[0].reset();
+      },
+      error: function(xhr) {
+        var msg = xhr.responseJSON ? xhr.responseJSON.message : 'Terjadi kesalahan. Coba lagi.';
+        showKontakAlert(msg, false);
+      },
+      complete: function() {
+        $('#btn-kontak-text').text('Kirim Pesan');
+        $('#btn-kirim-kontak').prop('disabled', false);
+      }
+    });
+  });
+
+  function showKontakAlert(msg, sukses) {
+    var el = $('#kontak-alert');
+    el.css({
+      background: sukses ? '#052e16' : '#450a0a',
+      border:     sukses ? '1px solid #166534' : '1px solid #991b1b',
+      color:      sukses ? '#4ade80' : '#fca5a5'
+    });
+    el.html((sukses ? '✓ ' : '✗ ') + msg).fadeIn(300);
+    if (sukses) setTimeout(function() { el.fadeOut(400); }, 5000);
+  }
+  </script>
 </body>
 </html>
