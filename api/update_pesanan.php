@@ -59,5 +59,38 @@ if ($action === 'update_status') {
     }
 }
 
+if ($action === 'update_full') {
+    $nama     = trim($data['nama']      ?? '');
+    $no_hp    = trim($data['no_hp']     ?? '');
+    $menu_id  = (int)($data['menu_id']  ?? 0);
+    $menu_nama = trim($data['menu_nama'] ?? '');
+    $harga    = (int)($data['harga']    ?? 0);
+    $jumlah   = (int)($data['jumlah']   ?? 1);
+    $total    = (int)($data['total']    ?? 0);
+    $catatan  = trim($data['catatan']   ?? '');
+    $status   = trim($data['status']    ?? 'baru');
+
+    $allowed = ['baru', 'diproses', 'selesai', 'dibatalkan'];
+    if (!$nama) {
+        http_response_code(422);
+        die(json_encode(['success' => false, 'message' => 'Nama pemesan wajib diisi.']));
+    }
+    if (!in_array($status, $allowed)) $status = 'baru';
+
+    $stmt = $conn->prepare(
+        "UPDATE pesanan SET nama=?, no_hp=?, menu_id=?, menu_nama=?, harga=?, jumlah=?, total=?, catatan=?, status=? WHERE id=?"
+    );
+    $stmt->bind_param('ssississsi', $nama, $no_hp, $menu_id, $menu_nama, $harga, $jumlah, $total, $catatan, $status, $id);
+    if ($stmt->execute()) {
+        $stmt->close();
+        $conn->close();
+        echo json_encode(['success' => true, 'message' => "Pesanan #$id berhasil diperbarui."]);
+        exit;
+    } else {
+        http_response_code(500);
+        die(json_encode(['success' => false, 'message' => 'Gagal memperbarui pesanan: ' . $conn->error]));
+    }
+}
+
 http_response_code(400);
 echo json_encode(['success' => false, 'message' => 'Aksi tidak dikenali.']);

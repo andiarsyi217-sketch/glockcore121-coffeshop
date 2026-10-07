@@ -564,6 +564,71 @@
       margin-bottom: 0.8rem;
       stroke: #3f3f46;
     }
+
+    /* CRUD: Edit button */
+    .btn-edit {
+      background: rgba(59, 130, 246, 0.12);
+      color: #93c5fd;
+      border-color: rgba(59, 130, 246, 0.25);
+    }
+    .btn-edit:hover {
+      background: rgba(59, 130, 246, 0.22);
+    }
+
+    /* CRUD: Wide modal */
+    .modal-box-wide {
+      background: #121215;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      width: 100%;
+      max-width: 600px;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    /* CRUD: Confirm overlay */
+    .confirm-box {
+      background: #121215;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      border-radius: 16px;
+      padding: 2rem;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+    }
+
+    /* Menu admin card — add action buttons */
+    .menu-admin-actions {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    /* Menu CRUD table */
+    .menu-crud-table th, .menu-crud-table td {
+      padding: 12px 14px;
+    }
+
+    /* Status badge inline */
+    .status-badge-inline {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    /* Scrollable modal */
+    .modal-scroll {
+      max-height: 75vh;
+      overflow-y: auto;
+      padding-right: 2px;
+    }
   </style>
 </head>
 <body>
@@ -731,16 +796,38 @@
       </div>
     </div>
 
-    <!-- TAB 2: KATALOG MENU -->
+    <!-- TAB 2: KATALOG MENU (CRUD) -->
     <div id="tab-menu" class="content-box" style="display:none;">
       <div class="toolbar">
         <div>
-          <h3 style="font-size:1rem; font-weight:700;">Daftar 13 Menu Glockcore 121</h3>
-          <p style="font-size:0.8rem; color:#71717a;">Informasi menu, kategori, harga, dan ketersediaan stok produk.</p>
+          <h3 style="font-size:1rem; font-weight:700;">Katalog Menu Glockcore 121</h3>
+          <p style="font-size:0.8rem; color:#71717a;">Kelola semua menu: tambah, edit nama/harga/kategori, dan hapus.</p>
+        </div>
+        <div style="display:flex; gap:0.6rem;">
+          <button onclick="bukaModalTambahMenu()" class="btn btn-primary">+ Tambah Menu</button>
+          <button onclick="renderMenuCatalog()" class="btn btn-dark">🔄 Refresh</button>
         </div>
       </div>
-      <div class="menu-admin-grid" id="menuAdminGrid">
-        <!-- Render 13 menu cards -->
+      <div class="table-responsive">
+        <table class="menu-crud-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Gambar</th>
+              <th>Nama Menu</th>
+              <th>Kategori</th>
+              <th>Harga</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="menuTableBody">
+            <!-- Diisi oleh renderMenuCatalog() -->
+          </tbody>
+        </table>
+      </div>
+      <div id="menuEmpty" class="empty-state" style="display:none;">
+        <p style="font-weight:600; color:#fff; margin-bottom:4px;">Belum Ada Menu</p>
+        <p style="font-size:0.82rem;">Klik "Tambah Menu" untuk menambahkan produk baru.</p>
       </div>
     </div>
 
@@ -823,6 +910,127 @@
           <button type="submit" class="btn btn-primary">Simpan Pesanan</button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- ===================== MODAL EDIT PESANAN ===================== -->
+  <div id="editPesananModal" class="modal-overlay" style="display:none;">
+    <div class="modal-box-wide">
+      <h3 class="modal-title">✏️ Edit Pesanan</h3>
+      <p class="modal-desc">Ubah detail pesanan. Perubahan tersimpan di database / localStorage.</p>
+
+      <form id="editPesananForm" onsubmit="event.preventDefault(); simpanEditPesanan();">
+        <input type="hidden" id="ep-id">
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+          <div class="form-group">
+            <label class="form-label">Nama Pemesan *</label>
+            <input type="text" id="ep-nama" class="form-input" placeholder="Nama pelanggan" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">No. HP / WA</label>
+            <input type="tel" id="ep-nohp" class="form-input" placeholder="08xxxxxxxxxx">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Pilih Menu *</label>
+          <select id="ep-menu" class="form-input" onchange="updateEditHarga()">
+            <!-- Options populated dynamically -->
+          </select>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.75rem;">
+          <div class="form-group">
+            <label class="form-label">Jumlah *</label>
+            <input type="number" id="ep-jumlah" class="form-input" value="1" min="1" max="99" oninput="updateEditHarga()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Harga Satuan</label>
+            <input type="text" id="ep-harga-display" class="form-input" readonly style="background:#141416; font-weight:700;">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Total</label>
+            <input type="text" id="ep-total-display" class="form-input" readonly style="background:#141416; font-weight:700; color:#34d399;">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Catatan</label>
+          <input type="text" id="ep-catatan" class="form-input" placeholder="Catatan pesanan...">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Status Pesanan</label>
+          <select id="ep-status" class="form-input">
+            <option value="baru">🔵 Baru</option>
+            <option value="diproses">🟡 Diproses</option>
+            <option value="selesai">🟢 Selesai</option>
+            <option value="dibatalkan">🔴 Dibatalkan</option>
+          </select>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:0.6rem; margin-top:1.5rem;">
+          <button type="button" onclick="tutupModalEditPesanan()" class="btn btn-dark">Batal</button>
+          <button type="submit" class="btn btn-primary">💾 Simpan Perubahan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================== MODAL TAMBAH / EDIT MENU ===================== -->
+  <div id="menuCrudModal" class="modal-overlay" style="display:none;">
+    <div class="modal-box">
+      <h3 class="modal-title" id="menuCrudTitle">+ Tambah Menu Baru</h3>
+      <p class="modal-desc">Isi detail produk baru yang akan ditampilkan di halaman menu.</p>
+
+      <form id="menuCrudForm" onsubmit="event.preventDefault(); simpanMenu();">
+        <input type="hidden" id="mc-id">
+
+        <div class="form-group">
+          <label class="form-label">Nama Menu *</label>
+          <input type="text" id="mc-nama" class="form-input" placeholder="Contoh: Black Coffee" required>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+          <div class="form-group">
+            <label class="form-label">Harga (Rp) *</label>
+            <input type="number" id="mc-harga" class="form-input" placeholder="13000" min="1000" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Kategori *</label>
+            <select id="mc-kat" class="form-input">
+              <option value="coffee">Coffee</option>
+              <option value="non-coffee">Non-Coffee</option>
+              <option value="tea">Tea</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Nama File Gambar</label>
+          <input type="text" id="mc-img" class="form-input" placeholder="Contoh: americano.jpeg">
+          <p style="font-size:0.75rem; color:#71717a; margin-top:4px;">Nama file gambar yang sudah diupload ke folder proyek. Kosongkan untuk pakai logo.</p>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:0.6rem; margin-top:1.5rem;">
+          <button type="button" onclick="tutupModalMenu()" class="btn btn-dark">Batal</button>
+          <button type="submit" class="btn btn-primary" id="menuCrudSubmitBtn">💾 Simpan Menu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================== MODAL KONFIRMASI HAPUS ===================== -->
+  <div id="confirmDeleteModal" class="modal-overlay" style="display:none;">
+    <div class="confirm-box">
+      <div style="font-size:2.5rem; margin-bottom:1rem;">🗑️</div>
+      <h3 class="modal-title" style="margin-bottom:0.5rem;" id="confirmDeleteTitle">Hapus Data?</h3>
+      <p class="modal-desc" id="confirmDeleteDesc">Aksi ini tidak dapat diurungkan.</p>
+      <div style="display:flex; justify-content:center; gap:0.75rem; margin-top:1.5rem;">
+        <button onclick="tutupConfirmDelete()" class="btn btn-dark">Batal</button>
+        <button onclick="eksekusiHapus()" class="btn btn-danger" style="padding:10px 24px;">Ya, Hapus</button>
+      </div>
     </div>
   </div>
 
@@ -1212,8 +1420,11 @@
           </td>
           <td>
             <div style="display:flex; gap:6px;">
+              <button onclick="bukaModalEditPesanan('${o.id}')" class="btn btn-edit" style="padding:4px 8px; font-size:0.75rem;" title="Edit Pesanan">
+                ✏️
+              </button>
               <button onclick="hapusPesanan('${o.id}')" class="btn btn-danger" style="padding:4px 8px; font-size:0.75rem;" title="Hapus">
-                ✕
+                🗑️
               </button>
             </div>
           </td>
@@ -1413,20 +1624,333 @@
     showToast('Data pesanan berhasil diexport ke CSV!');
   }
 
-  // Render Katalog Menu
-  function renderMenuCatalog() {
-    const container = document.getElementById('menuAdminGrid');
-    container.innerHTML = MASTER_MENUS.map(m => `
-      <div class="menu-admin-card">
-        <img src="${m.img}" alt="${m.nama}" class="menu-admin-img" onerror="this.src='logo.jpeg'">
-        <div class="menu-admin-info">
-          <div class="menu-admin-cat">${m.kat}</div>
-          <div class="menu-admin-title" title="${m.nama}">${m.nama}</div>
-          <div class="menu-admin-price">${formatRupiah(m.harga)}</div>
-        </div>
-      </div>
-    `).join('');
+  // ===================== CRUD: PESANAN =====================
+
+  // Buka modal edit pesanan — prefill semua field
+  function bukaModalEditPesanan(id) {
+    const o = allOrders.find(ord => String(ord.id) === String(id));
+    if (!o) { showToast('Pesanan tidak ditemukan!', false); return; }
+
+    // Populate dropdown menu
+    const epMenu = document.getElementById('ep-menu');
+    epMenu.innerHTML = MASTER_MENUS.map(m =>
+      `<option value="${m.id}" data-harga="${m.harga}" data-nama="${m.nama}">${m.nama} — ${formatRupiah(m.harga)}</option>`
+    ).join('');
+
+    // Set nilai field
+    document.getElementById('ep-id').value = o.id;
+    document.getElementById('ep-nama').value = o.nama || '';
+    document.getElementById('ep-nohp').value = o.no_hp || '';
+    document.getElementById('ep-jumlah').value = o.jumlah || 1;
+    document.getElementById('ep-catatan').value = o.catatan || '';
+    document.getElementById('ep-status').value = o.status || 'baru';
+
+    // Cari menu yang cocok, atau pilih pertama
+    const matchMenu = MASTER_MENUS.find(m => m.nama === (o.menu_nama || o.menu));
+    if (matchMenu) {
+      epMenu.value = matchMenu.id;
+    }
+    updateEditHarga();
+
+    document.getElementById('editPesananModal').style.display = 'flex';
   }
+
+  function tutupModalEditPesanan() {
+    document.getElementById('editPesananModal').style.display = 'none';
+  }
+
+  function updateEditHarga() {
+    const select = document.getElementById('ep-menu');
+    if (!select || !select.options.length) return;
+    const selected = select.options[select.selectedIndex];
+    const harga = parseInt(selected.getAttribute('data-harga')) || 0;
+    const qty = parseInt(document.getElementById('ep-jumlah').value) || 1;
+    document.getElementById('ep-harga-display').value = formatRupiah(harga);
+    document.getElementById('ep-total-display').value = formatRupiah(harga * qty);
+  }
+
+  // Simpan hasil edit pesanan
+  function simpanEditPesanan() {
+    const id = document.getElementById('ep-id').value;
+    const nama = document.getElementById('ep-nama').value.trim();
+    const noHp = document.getElementById('ep-nohp').value.trim();
+    const jumlah = parseInt(document.getElementById('ep-jumlah').value) || 1;
+    const catatan = document.getElementById('ep-catatan').value.trim();
+    const status = document.getElementById('ep-status').value;
+
+    const epMenu = document.getElementById('ep-menu');
+    const menuId = parseInt(epMenu.value);
+    const menuObj = MASTER_MENUS.find(m => m.id === menuId) || MASTER_MENUS[0];
+    const total = menuObj.harga * jumlah;
+
+    if (!nama) { showToast('Nama pemesan wajib diisi!', false); return; }
+
+    if (isLocalhost) {
+      // Update via PHP API (localhost)
+      fetch('api/update_pesanan.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'update_full',
+          id: id,
+          nama: nama,
+          no_hp: noHp,
+          menu_id: menuId,
+          menu_nama: menuObj.nama,
+          harga: menuObj.harga,
+          jumlah: jumlah,
+          total: total,
+          catatan: catatan,
+          status: status
+        })
+      })
+      .then(res => res.json())
+      .then(res => {
+        if (res.success) {
+          showToast(`Pesanan #${id} berhasil diperbarui!`);
+          tutupModalEditPesanan();
+          loadOrders();
+        } else {
+          editOrderLocal(id, nama, noHp, menuObj, jumlah, total, catatan, status);
+        }
+      })
+      .catch(() => editOrderLocal(id, nama, noHp, menuObj, jumlah, total, catatan, status));
+    } else {
+      editOrderLocal(id, nama, noHp, menuObj, jumlah, total, catatan, status);
+    }
+  }
+
+  function editOrderLocal(id, nama, noHp, menuObj, jumlah, total, catatan, status) {
+    const idx = allOrders.findIndex(o => String(o.id) === String(id));
+    if (idx !== -1) {
+      allOrders[idx] = Object.assign(allOrders[idx], {
+        nama, no_hp: noHp,
+        menu_nama: menuObj.nama,
+        menu_id: menuObj.id,
+        harga: menuObj.harga,
+        jumlah, total, catatan, status
+      });
+      saveOrdersToLocalStorage();
+      calculateStatsFromLocalStorage();
+      renderOrdersTable();
+      tutupModalEditPesanan();
+      showToast(`Pesanan #${id} berhasil diperbarui!`);
+    }
+  }
+
+  // Hapus Pesanan — pakai custom confirm modal
+  let _hapusTarget = null;
+  let _hapusType = null; // 'pesanan' | 'menu'
+
+  function hapusPesanan(id) {
+    _hapusTarget = id;
+    _hapusType = 'pesanan';
+    document.getElementById('confirmDeleteTitle').textContent = `Hapus Pesanan #${id}?`;
+    document.getElementById('confirmDeleteDesc').textContent = 'Data pesanan ini akan dihapus permanen dan tidak bisa dikembalikan.';
+    document.getElementById('confirmDeleteModal').style.display = 'flex';
+  }
+
+  function tutupConfirmDelete() {
+    document.getElementById('confirmDeleteModal').style.display = 'none';
+    _hapusTarget = null;
+    _hapusType = null;
+  }
+
+  function eksekusiHapus() {
+    const target = _hapusTarget;
+    const type = _hapusType;
+    tutupConfirmDelete();
+    if (type === 'pesanan') {
+      doHapusPesanan(target);
+    } else if (type === 'menu') {
+      doHapusMenu(target);
+    } else if (type === 'kontak') {
+      doHapusKontak(target);
+    }
+  }
+
+  function doHapusPesanan(id) {
+    if (isLocalhost) {
+      fetch('api/update_pesanan.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'delete', id: id })
+      })
+      .then(res => res.json())
+      .then(res => {
+        if (res.success) {
+          showToast(`Pesanan #${id} berhasil dihapus`);
+          loadOrders();
+        } else {
+          deleteLocalOrder(id);
+        }
+      })
+      .catch(() => deleteLocalOrder(id));
+    } else {
+      deleteLocalOrder(id);
+    }
+  }
+
+  function deleteLocalOrder(id) {
+    allOrders = allOrders.filter(o => String(o.id) !== String(id));
+    saveOrdersToLocalStorage();
+    calculateStatsFromLocalStorage();
+    renderOrdersTable();
+    showToast(`Pesanan #${id} dihapus`);
+  }
+
+  // ===================== CRUD: MENU =====================
+
+  // Data menu tersimpan (bisa dimodifikasi runtime)
+  let dynamicMenus = JSON.parse(localStorage.getItem('glockcore_menus') || 'null') || [...MASTER_MENUS];
+
+  function saveMenusToLocalStorage() {
+    try { localStorage.setItem('glockcore_menus', JSON.stringify(dynamicMenus)); } catch(e) {}
+    // Sync ke MASTER_MENUS agar dropdown pesanan ikut update
+    MASTER_MENUS.length = 0;
+    dynamicMenus.forEach(m => MASTER_MENUS.push(m));
+    populateManualMenuOptions();
+  }
+
+  // Render tabel menu dengan tombol Edit dan Hapus
+  function renderMenuCatalog() {
+    const tbody = document.getElementById('menuTableBody');
+    const emptyBox = document.getElementById('menuEmpty');
+
+    if (!dynamicMenus.length) {
+      if (tbody) tbody.innerHTML = '';
+      if (emptyBox) emptyBox.style.display = 'block';
+      return;
+    }
+    if (emptyBox) emptyBox.style.display = 'none';
+
+    const katLabel = { coffee: '☕ Coffee', 'non-coffee': '🍫 Non-Coffee', tea: '🍵 Tea' };
+    const katColor = { coffee: '#fbbf24', 'non-coffee': '#a78bfa', tea: '#34d399' };
+
+    if (tbody) {
+      tbody.innerHTML = dynamicMenus.map((m, idx) => `
+        <tr>
+          <td style="color:#71717a; font-weight:700;">${idx + 1}</td>
+          <td>
+            <img src="${m.img || 'logo.jpeg'}" alt="${m.nama}"
+              style="width:48px; height:48px; border-radius:8px; object-fit:cover; border:1px solid var(--border); background:#000;"
+              onerror="this.src='logo.jpeg'">
+          </td>
+          <td style="font-weight:700; color:#fff;">${escapeHtml(m.nama)}</td>
+          <td>
+            <span style="color:${katColor[m.kat]||'#a1a1aa'}; font-size:0.8rem; font-weight:600;">
+              ${katLabel[m.kat] || m.kat}
+            </span>
+          </td>
+          <td style="font-weight:700; color:#34d399;">${formatRupiah(m.harga)}</td>
+          <td>
+            <div style="display:flex; gap:6px;">
+              <button onclick="bukaModalEditMenu(${m.id})" class="btn btn-edit" style="padding:4px 10px; font-size:0.75rem;" title="Edit Menu">
+                ✏️ Edit
+              </button>
+              <button onclick="konfirmasiHapusMenu(${m.id})" class="btn btn-danger" style="padding:4px 10px; font-size:0.75rem;" title="Hapus Menu">
+                🗑️
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Update tab count
+    const tabBtn = document.querySelector('.tab-btn:nth-child(2)');
+    if (tabBtn) {
+      const countEl = tabBtn.querySelector('.tab-count');
+      if (countEl) countEl.textContent = dynamicMenus.length;
+    }
+  }
+
+  // Buka modal tambah menu (mode Create)
+  function bukaModalTambahMenu() {
+    document.getElementById('menuCrudTitle').textContent = '+ Tambah Menu Baru';
+    document.getElementById('menuCrudSubmitBtn').textContent = '💾 Tambah Menu';
+    document.getElementById('mc-id').value = '';
+    document.getElementById('menuCrudForm').reset();
+    document.getElementById('menuCrudModal').style.display = 'flex';
+  }
+
+  // Buka modal edit menu (mode Update)
+  function bukaModalEditMenu(id) {
+    const m = dynamicMenus.find(x => x.id === id);
+    if (!m) { showToast('Menu tidak ditemukan!', false); return; }
+
+    document.getElementById('menuCrudTitle').textContent = '✏️ Edit Menu';
+    document.getElementById('menuCrudSubmitBtn').textContent = '💾 Simpan Perubahan';
+    document.getElementById('mc-id').value = m.id;
+    document.getElementById('mc-nama').value = m.nama;
+    document.getElementById('mc-harga').value = m.harga;
+    document.getElementById('mc-kat').value = m.kat;
+    document.getElementById('mc-img').value = m.img || '';
+    document.getElementById('menuCrudModal').style.display = 'flex';
+  }
+
+  function tutupModalMenu() {
+    document.getElementById('menuCrudModal').style.display = 'none';
+  }
+
+  // Simpan menu (Create atau Update)
+  function simpanMenu() {
+    const id = document.getElementById('mc-id').value;
+    const nama = document.getElementById('mc-nama').value.trim();
+    const harga = parseInt(document.getElementById('mc-harga').value) || 0;
+    const kat = document.getElementById('mc-kat').value;
+    const img = document.getElementById('mc-img').value.trim() || 'logo.jpeg';
+
+    if (!nama || !harga) { showToast('Nama dan harga wajib diisi!', false); return; }
+
+    if (id) {
+      // UPDATE existing menu
+      const idx = dynamicMenus.findIndex(m => String(m.id) === String(id));
+      if (idx !== -1) {
+        dynamicMenus[idx] = { ...dynamicMenus[idx], nama, harga, kat, img };
+        saveMenusToLocalStorage();
+        renderMenuCatalog();
+        tutupModalMenu();
+        showToast(`Menu "${nama}" berhasil diperbarui!`);
+      }
+    } else {
+      // CREATE new menu — generate ID baru
+      const newId = dynamicMenus.length ? Math.max(...dynamicMenus.map(m => m.id)) + 1 : 1;
+      dynamicMenus.push({ id: newId, nama, harga, kat, img });
+      saveMenusToLocalStorage();
+      renderMenuCatalog();
+      tutupModalMenu();
+      showToast(`Menu "${nama}" berhasil ditambahkan!`);
+    }
+  }
+
+  // Konfirmasi hapus menu
+  function konfirmasiHapusMenu(id) {
+    const m = dynamicMenus.find(x => x.id === id);
+    _hapusTarget = id;
+    _hapusType = 'menu';
+    document.getElementById('confirmDeleteTitle').textContent = `Hapus Menu?`;
+    document.getElementById('confirmDeleteDesc').textContent = `"${m ? m.nama : id}" akan dihapus dari daftar menu.`;
+    document.getElementById('confirmDeleteModal').style.display = 'flex';
+  }
+
+  function doHapusMenu(id) {
+    const m = dynamicMenus.find(x => x.id === id);
+    dynamicMenus = dynamicMenus.filter(x => x.id !== id);
+    saveMenusToLocalStorage();
+    renderMenuCatalog();
+    showToast(`Menu "${m ? m.nama : id}" berhasil dihapus!`);
+  }
+
+  // ===================== CRUD: KONTAK (Hapus) =====================
+  function hapusKontak(idx) {
+    _hapusTarget = idx;
+    _hapusType = 'kontak';
+    document.getElementById('confirmDeleteTitle').textContent = 'Hapus Pesan Kontak?';
+    document.getElementById('confirmDeleteDesc').textContent = 'Pesan kontak ini akan dihapus dari daftar.';
+    document.getElementById('confirmDeleteModal').style.display = 'flex';
+  }
+
 
   // Muat Pesan Kontak
   function loadContacts() {
@@ -1447,6 +1971,7 @@
             pesan: 'Halo kak, apakah bisa booking kedai lantai 2 untuk komunitas kopi hari Sabtu depan?'
           }
         ];
+        localStorage.setItem('glockcore_contacts', JSON.stringify(contacts));
       }
     } catch(e) {}
 
@@ -1459,7 +1984,7 @@
     }
 
     emptyBox.style.display = 'none';
-    tbody.innerHTML = contacts.map(c => `
+    tbody.innerHTML = contacts.map((c, i) => `
       <tr>
         <td style="color:#71717a; font-size:0.8rem; white-space:nowrap;">${formatDateTime(c.waktu)}</td>
         <td style="font-weight:600; color:#fff;">${escapeHtml(c.nama)}</td>
@@ -1467,12 +1992,29 @@
         <td style="font-weight:600; color:#e4e4e7;">${escapeHtml(c.subjek)}</td>
         <td style="color:#a1a1aa; font-size:0.82rem; max-width:300px;">${escapeHtml(c.pesan)}</td>
         <td>
-          <a href="mailto:${c.email}?subject=Balasan: ${encodeURIComponent(c.subjek)}" class="btn btn-dark" style="padding:4px 8px; font-size:0.75rem;">
-            ✉️ Balas
-          </a>
+          <div style="display:flex; gap:6px;">
+            <a href="mailto:${c.email}?subject=Balasan: ${encodeURIComponent(c.subjek)}" class="btn btn-dark" style="padding:4px 8px; font-size:0.75rem;">
+              ✉️ Balas
+            </a>
+            <button onclick="hapusKontak(${i})" class="btn btn-danger" style="padding:4px 8px; font-size:0.75rem;" title="Hapus">
+              🗑️
+            </button>
+          </div>
         </td>
       </tr>
     `).join('');
+  }
+
+  function doHapusKontak(idx) {
+    try {
+      let contacts = JSON.parse(localStorage.getItem('glockcore_contacts') || '[]');
+      contacts.splice(idx, 1);
+      localStorage.setItem('glockcore_contacts', JSON.stringify(contacts));
+      loadContacts();
+      showToast('Pesan kontak berhasil dihapus!');
+    } catch(e) {
+      showToast('Gagal menghapus pesan kontak.', false);
+    }
   }
 
   // Helpers
