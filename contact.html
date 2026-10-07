@@ -376,6 +376,32 @@
     $('#btn-kontak-text').text('Mengirim...');
     $('#btn-kirim-kontak').prop('disabled', true);
 
+    var isPhpServer = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+
+    if (!isPhpServer) {
+      var waMsg = "*PESAN KONTAK DARI WEBSITE GLOCKCORE 121*\n"
+                + "------------------------------------\n"
+                + "*Nama :* " + nama + "\n"
+                + "*Email :* " + email + "\n"
+                + "*Subjek :* " + subjek + "\n"
+                + "------------------------------------\n"
+                + "*Pesan :*\n" + pesan + "\n"
+                + "------------------------------------\n"
+                + "Halo Admin Glockcore 121, saya menghubungi melalui form kontak website.";
+      var waUrl = "https://api.whatsapp.com/send?phone=6282298663371&text=" + encodeURIComponent(waMsg);
+      showKontakAlert('Membuka WhatsApp untuk mengirim pesan...', true);
+      setTimeout(function() {
+        var win = window.open(waUrl, '_blank');
+        if (!win || win.closed || typeof win.closed === 'undefined') {
+          window.location.href = waUrl;
+        }
+      }, 500);
+      $('#form-kontak')[0].reset();
+      $('#btn-kontak-text').text('Kirim Pesan');
+      $('#btn-kirim-kontak').prop('disabled', false);
+      return;
+    }
+
     $.ajax({
       url: 'api/submit_kontak.php',
       method: 'POST',
@@ -386,7 +412,7 @@
         $('#form-kontak')[0].reset();
       },
       error: function(xhr) {
-        var msg = xhr.responseJSON ? xhr.responseJSON.message : 'Terjadi kesalahan. Coba lagi.';
+        var msg = xhr.responseJSON ? xhr.responseJSON.message : 'Terjadi kendala backend. Pesan Anda dapat dikirim langsung via WhatsApp!';
         showKontakAlert(msg, false);
       },
       complete: function() {

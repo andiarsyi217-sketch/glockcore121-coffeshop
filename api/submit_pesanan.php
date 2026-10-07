@@ -29,11 +29,13 @@ $menu_id = (int)($data['menu_id'] ?? 0);
 $jumlah  = max(1, (int)($data['jumlah'] ?? 1));
 $catatan = trim($data['catatan'] ?? '');
 
+$menu_nama_param = trim($data['menu_nama'] ?? '');
+
 // Validasi
 $errors = [];
 if (empty($nama))                        $errors[] = 'Nama tidak boleh kosong.';
 if (empty($no_hp))                       $errors[] = 'Nomor HP tidak boleh kosong.';
-if ($menu_id <= 0)                       $errors[] = 'Menu tidak valid.';
+if ($menu_id <= 0 && empty($menu_nama_param)) $errors[] = 'Menu tidak valid.';
 if ($jumlah < 1 || $jumlah > 20)        $errors[] = 'Jumlah harus antara 1-20.';
 
 if (!empty($errors)) {
@@ -42,16 +44,32 @@ if (!empty($errors)) {
 }
 
 // Cek menu di database
-$stmt = $conn->prepare("SELECT id, nama, harga FROM menu WHERE id = ? AND tersedia = 1");
-$stmt->bind_param('i', $menu_id);
-$stmt->execute();
-$menu = $stmt->get_result()->fetch_assoc();
-$stmt->close();
+$menu_nama_param = trim($data['menu_nama'] ?? '');
+$menu = null;
+
+if ($menu_id > 0) {
+    $stmt = $conn->prepare("SELECT id, nama, harga FROM menu WHERE id = ? AND tersedia = 1");
+    $stmt->bind_param('i', $menu_id);
+    $stmt->execute();
+    $menu = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+}
+
+if (!$menu && !empty($menu_nama_param)) {
+    $stmt = $conn->prepare("SELECT id, nama, harga FROM menu WHERE (nama = ? OR nama LIKE ?) AND tersedia = 1 LIMIT 1");
+    $like = '%' . $menu_nama_param . '%';
+    $stmt->bind_param('ss', $menu_nama_param, $like);
+    $stmt->execute();
+    $menu = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+}
 
 if (!$menu) {
     http_response_code(404);
     die(json_encode(['success' => false, 'message' => 'Menu tidak ditemukan atau sudah habis.']));
 }
+
+$menu_id = (int)$menu['id'];
 
 $total = $menu['harga'] * $jumlah;
 
