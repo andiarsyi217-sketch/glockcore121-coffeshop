@@ -116,8 +116,9 @@ function badge($status) {
 
 <div class="header">
   <div class="header-logo">GLOCKCORE <span>121</span></div>
-  <div class="header-badge">Admin Panel</div>
-  <a href="../index.html" style="margin-left:auto;color:#555;font-size:0.85rem;text-decoration:none;">← Kembali ke Website</a>
+  <div class="header-badge">Admin Panel PHP</div>
+  <a href="../admin.html" style="margin-left:auto;background:#27272a;color:#fff;padding:6px 14px;border-radius:8px;font-size:0.82rem;text-decoration:none;border:1px solid #3f3f46;font-weight:600;">✨ Buka Modern Dashboard (admin.html)</a>
+  <a href="../index.html" style="color:#71717a;font-size:0.85rem;text-decoration:none;margin-left:12px;">← Ke Website</a>
 </div>
 
 <div class="stats">

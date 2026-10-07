@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Glockcore 121</title>
+  <link rel="icon" type="image/jpeg" href="logo.jpeg">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #09090b;
+      --card-bg: #121215;
+      --card-hover: #18181c;
+      --border: #232328;
+      --border-focus: #3f3f46;
+      --text: #f4f4f5;
+      --text-muted: #8e8e93;
+      --primary: #ffffff;
+      --accent: #e4e4e7;
+      --blue: #3b82f6;
+      --yellow: #f59e0b;
+      --green: #10b981;
+      --red: #ef4444;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-heading: 'Syne', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Top Navbar */
+    .admin-navbar {
+      background: rgba(18, 18, 21, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0.9rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+    }
+
+    .brand-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+    }
+
+    .brand-title span { color: #888; }
+
+    .admin-badge {
+      background: #27272a;
+      color: #e4e4e7;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .env-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: #18181b;
+      border: 1px solid var(--border);
+      color: #a1a1aa;
+    }
+
+    .env-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      font-family: var(--font-body);
+    }
+
+    .btn-primary {
+      background: #fff;
+      color: #000;
+    }
+    .btn-primary:hover {
+      background: #e4e4e7;
+      transform: translateY(-1px);
+    }
+
+    .btn-dark {
+      background: #1e1e24;
+      color: #d4d4d8;
+      border-color: var(--border);
+    }
+    .btn-dark:hover {
+      background: #27272f;
+      color: #fff;
+    }
+
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.15);
+      color: #fca5a5;
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+    .btn-danger:hover {
+      background: rgba(239, 68, 68, 0.25);
+    }
+
+    /* Main Container */
+    .main-wrap {
+      max-width: 1300px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.5rem;
+      flex: 1;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: border-color 0.2s;
+    }
+    .stat-card:hover {
+      border-color: var(--border-focus);
+    }
+
+    .stat-info h4 {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.35rem;
+    }
+
+    .stat-info .stat-value {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.1;
+    }
+
+    .stat-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      background: #1a1a20;
+      border: 1px solid var(--border);
+    }
+
+    /* Tabs Bar */
+    .tabs-bar {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      padding: 10px 18px;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover { color: #e4e4e7; }
+    .tab-btn.active {
+      color: #fff;
+      border-bottom-color: #fff;
+    }
+
+    .tab-count {
+      background: #27272a;
+      color: #a1a1aa;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 10px;
+    }
+    .tab-btn.active .tab-count {
+      background: #3f3f46;
+      color: #fff;
+    }
+
+    /* Content Area */
+    .content-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .toolbar {
+      padding: 1rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .search-input {
+      background: #18181b;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      color: #fff;
+      font-size: 0.85rem;
+      outline: none;
+      min-width: 240px;
+      transition: border-color 0.2s;
+    }
+    .search-input:focus {
+      border-color: var(--border-focus);
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .pill-btn {
+      background: #18181b;
+      border: 1px solid var(--border);
+      color: #a1a1aa;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .pill-btn:hover { color: #fff; }
+    .pill-btn.active {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+
+    /* Table */
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      text-align: left;
+    }
+
+    th {
+      background: #16161a;
+      padding: 12px 16px;
+      color: #71717a;
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--card-hover); }
+
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .badge-baru { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
+    .badge-diproses { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-selesai { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-dibatalkan { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+    .wa-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: #34d399;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.82rem;
+      background: rgba(16, 185, 129, 0.1);
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      transition: background 0.2s;
+    }
+    .wa-link:hover {
+      background: rgba(16, 185, 129, 0.2);
+    }
+
+    .status-select {
+      background: #18181b;
+      color: #f4f4f5;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* Menu Grid in Admin */
+    .menu-admin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      padding: 1.2rem;
+    }
+
+    .menu-admin-card {
+      background: #16161a;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      display: flex;
+      gap: 0.9rem;
+      align-items: center;
+      transition: border-color 0.2s;
+    }
+    .menu-admin-card:hover {
+      border-color: var(--border-focus);
+    }
+
+    .menu-admin-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      background: #000;
+    }
+
+    .menu-admin-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .menu-admin-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .menu-admin-cat {
+      font-size: 0.72rem;
+      color: #71717a;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .menu-admin-price {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #fff;
+      margin-top: 4px;
+    }
+
+    /* Modals */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal-box {
+      background: #121215;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      width: 100%;
+      max-width: 480px;
+      position: relative;
+    }
+
+    .modal-title {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.35rem;
+    }
+
+    .modal-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .form-input {
+      width: 100%;
+      background: #18181b;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #fff;
+      font-size: 0.9rem;
+      outline: none;
+      font-family: var(--font-body);
+      transition: border-color 0.2s;
+    }
+    .form-input:focus {
+      border-color: var(--border-focus);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background: #18181b;
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      z-index: 2000;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* Empty state */
+    .empty-state {
+      padding: 4rem 1rem;
+      text-align: center;
+      color: #71717a;
+    }
+    .empty-state svg {
+      margin-bottom: 0.8rem;
+      stroke: #3f3f46;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Modal Login PIN Gatekeeper -->
+  <div id="pinModal" class="modal-overlay" style="display:none;">
+    <div class="modal-box" style="text-align:center;">
+      <div style="width:48px; height:48px; background:#18181b; border:1px solid var(--border); border-radius:12px; margin:0 auto 1rem; display:flex; align-items:center; justify-content:center; font-size:1.4rem;">
+        🔐
+      </div>
+      <h3 class="modal-title">Glockcore 121 Admin</h3>
+      <p class="modal-desc">Masukkan PIN Admin untuk mengakses panel kontrol.</p>
+      
+      <div id="pinError" style="display:none; background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.3); color:#fca5a5; padding:8px; border-radius:8px; font-size:0.8rem; margin-bottom:1rem;">
+        PIN salah! Coba lagi (Default: 121)
+      </div>
+
+      <form id="pinForm" onsubmit="event.preventDefault(); verifyPin();">
+        <div class="form-group">
+          <input type="password" id="inputPin" class="form-input" placeholder="Masukkan PIN Admin..." style="text-align:center; font-size:1.2rem; letter-spacing:0.2em;" autocomplete="off" autofocus>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; padding:12px; font-size:0.95rem;">
+          Masuk ke Dashboard
+        </button>
+      </form>
+      <p style="margin-top:1.2rem; font-size:0.75rem; color:#52525b;">
+        PIN Default: <strong>121</strong>
+      </p>
+    </div>
+  </div>
+
+  <!-- Top Navigation -->
+  <header class="admin-navbar">
+    <div style="display:flex; align-items:center; gap:1rem;">
+      <a href="admin.html" class="brand-wrap">
+        <img src="logo.jpeg" alt="Glockcore 121" class="brand-logo">
+        <span class="brand-title">GLOCKCORE <span>121</span></span>
+      </a>
+      <span class="admin-badge">Admin Dashboard</span>
+    </div>
+
+    <div class="nav-actions">
+      <div class="env-tag" id="envIndicator">
+        <span class="env-dot"></span>
+        <span id="envText">Memeriksa koneksi...</span>
+      </div>
+
+      <a href="menu.html" target="_blank" class="btn btn-dark" title="Lihat Website">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        <span>Lihat Menu</span>
+      </a>
+
+      <button onclick="logoutAdmin()" class="btn btn-dark" title="Keluar">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+        <span>Keluar</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-wrap">
+    
+    <!-- Stats Row -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-info">
+          <h4>Total Pesanan</h4>
+          <div class="stat-value" id="statTotalPesanan">0</div>
+        </div>
+        <div class="stat-icon" style="color:#60a5fa;">📋</div>
+      </div>
+
+      <div class="stat-card" style="border-color: rgba(59,130,246,0.3);">
+        <div class="stat-info">
+          <h4>Pesanan Baru</h4>
+          <div class="stat-value" id="statPesananBaru" style="color:#60a5fa;">0</div>
+        </div>
+        <div class="stat-icon" style="color:#60a5fa;">🔔</div>
+      </div>
+
+      <div class="stat-card" style="border-color: rgba(16,185,129,0.3);">
+        <div class="stat-info">
+          <h4>Estimasi Omset</h4>
+          <div class="stat-value" id="statTotalOmset" style="color:#34d399; font-size:1.5rem;">Rp 0</div>
+        </div>
+        <div class="stat-icon" style="color:#34d399;">💰</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-info">
+          <h4>Pesanan Selesai</h4>
+          <div class="stat-value" id="statPesananSelesai" style="color:#34d399;">0</div>
+        </div>
+        <div class="stat-icon" style="color:#34d399;">✅</div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <div class="tabs-bar">
+      <button class="tab-btn active" onclick="switchTab('pesanan')">
+        📋 Manajemen Pesanan
+        <span class="tab-count" id="badgePesananCount">0</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('menu')">
+        ☕ Katalog Menu (13 Menu)
+        <span class="tab-count">13</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('kontak')">
+        ✉️ Pesan Kontak
+        <span class="tab-count" id="badgeKontakCount">0</span>
+      </button>
+    </div>
+
+    <!-- TAB 1: MANAJEMEN PESANAN -->
+    <div id="tab-pesanan" class="content-box">
+      <div class="toolbar">
+        <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+          <input type="text" id="orderSearch" class="search-input" placeholder="🔍 Cari nama pemesan, menu, ID..." oninput="filterOrders()">
+          <div class="filter-pills">
+            <button class="pill-btn active" onclick="setFilterStatus('all')">Semua</button>
+            <button class="pill-btn" onclick="setFilterStatus('baru')">Baru</button>
+            <button class="pill-btn" onclick="setFilterStatus('diproses')">Diproses</button>
+            <button class="pill-btn" onclick="setFilterStatus('selesai')">Selesai</button>
+            <button class="pill-btn" onclick="setFilterStatus('dibatalkan')">Batal</button>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:0.6rem;">
+          <button onclick="bukaModalManual()" class="btn btn-primary">
+            + Tambah Pesanan Kasir
+          </button>
+          <button onclick="exportOrdersCsv()" class="btn btn-dark" title="Download Excel/CSV">
+            📥 Export CSV
+          </button>
+          <button onclick="loadOrders()" class="btn btn-dark" title="Segarkan Data">
+            🔄 Refresh
+          </button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>#ID</th>
+              <th>Waktu</th>
+              <th>Pemesan</th>
+              <th>No. WhatsApp</th>
+              <th>Pesanan</th>
+              <th>Total</th>
+              <th>Catatan</th>
+              <th>Status</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTableBody">
+            <!-- Data baris pesanan akan diisi secara dinamis -->
+          </tbody>
+        </table>
+      </div>
+      <div id="ordersEmpty" class="empty-state" style="display:none;">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+        <p style="font-weight:600; color:#fff; margin-bottom:4px;">Belum Ada Pesanan</p>
+        <p style="font-size:0.82rem;">Pesanan yang masuk dari halaman menu akan muncul di sini secara otomatis.</p>
+      </div>
+    </div>
+
+    <!-- TAB 2: KATALOG MENU -->
+    <div id="tab-menu" class="content-box" style="display:none;">
+      <div class="toolbar">
+        <div>
+          <h3 style="font-size:1rem; font-weight:700;">Daftar 13 Menu Glockcore 121</h3>
+          <p style="font-size:0.8rem; color:#71717a;">Informasi menu, kategori, harga, dan ketersediaan stok produk.</p>
+        </div>
+      </div>
+      <div class="menu-admin-grid" id="menuAdminGrid">
+        <!-- Render 13 menu cards -->
+      </div>
+    </div>
+
+    <!-- TAB 3: PESAN KONTAK -->
+    <div id="tab-kontak" class="content-box" style="display:none;">
+      <div class="toolbar">
+        <div>
+          <h3 style="font-size:1rem; font-weight:700;">Pesan Kontak Masuk</h3>
+          <p style="font-size:0.8rem; color:#71717a;">Pesan dan pertanyaan yang dikirimkan pengunjung dari halaman kontak.</p>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Waktu</th>
+              <th>Nama Pengirim</th>
+              <th>Email</th>
+              <th>Subjek</th>
+              <th>Isi Pesan</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="kontakTableBody">
+            <!-- Data kontak -->
+          </tbody>
+        </table>
+      </div>
+      <div id="kontakEmpty" class="empty-state" style="display:none;">
+        <p style="font-weight:600; color:#fff; margin-bottom:4px;">Belum Ada Pesan Masuk</p>
+        <p style="font-size:0.82rem;">Pesan kontak yang dikirim oleh pengunjung akan tercatat di sini.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Modal Tambah Pesanan Kasir / Manual -->
+  <div id="manualOrderModal" class="modal-overlay" style="display:none;">
+    <div class="modal-box">
+      <h3 class="modal-title">+ Pesanan Kasir Manual</h3>
+      <p class="modal-desc">Catat pesanan pelanggan walk-in / dine-in / kasir kedai.</p>
+      
+      <form id="manualOrderForm" onsubmit="event.preventDefault(); simpanPesananManual();">
+        <div class="form-group">
+          <label class="form-label">Pilih Menu *</label>
+          <select id="m-menu" class="form-input" onchange="updateManualHarga()">
+            <!-- Options dynamically populated -->
+          </select>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+          <div class="form-group">
+            <label class="form-label">Nama Pemesan *</label>
+            <input type="text" id="m-nama" class="form-input" placeholder="Contoh: Rian" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">No. HP / WA</label>
+            <input type="tel" id="m-nohp" class="form-input" placeholder="08xxxxxxxxxx">
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+          <div class="form-group">
+            <label class="form-label">Jumlah Cup *</label>
+            <input type="number" id="m-jumlah" class="form-input" value="1" min="1" max="50" oninput="updateManualHarga()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Total Harga</label>
+            <input type="text" id="m-total" class="form-input" value="Rp 0" readonly style="background:#141416; font-weight:700;">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Catatan (Opsional)</label>
+          <input type="text" id="m-catatan" class="form-input" placeholder="Contoh: Dine In, Less sugar, es banyak">
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:0.6rem; margin-top:1.5rem;">
+          <button type="button" onclick="tutupModalManual()" class="btn btn-dark">Batal</button>
+          <button type="submit" class="btn btn-primary">Simpan Pesanan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="adminToast" class="toast">
+    <span id="toastIcon">✓</span>
+    <span id="toastText">Berhasil diperbarui</span>
+  </div>
+
+  <!-- JavaScript Admin Engine -->
+  <script>
+  // 13 Master Data Menu Glockcore 121
+  const MASTER_MENUS = [
+    { id: 1, nama: "BLACK MAGz Americano", harga: 13000, kat: "coffee", img: "americano.jpeg" },
+    { id: 2, nama: "Butterscotch", harga: 17000, kat: "coffee", img: "butterscooth.jpeg" },
+    { id: 3, nama: "Caramel Machiato", harga: 15000, kat: "coffee", img: "caramel mathiato.jpeg" },
+    { id: 4, nama: "Coffee Latte", harga: 13000, kat: "coffee", img: "coffe latte.jpeg" },
+    { id: 5, nama: "SWEET MAGz Aren", harga: 13000, kat: "coffee", img: "kopi aren.jpeg" },
+    { id: 6, nama: "WHITE MAGz Kopi Susu", harga: 13000, kat: "coffee", img: "kopi susu.jpeg" },
+    { id: 7, nama: "Matcha Latte", harga: 15000, kat: "coffee", img: "matcha.jpeg" },
+    { id: 8, nama: "GREEN MAGz Pandan", harga: 14000, kat: "coffee", img: "pandan.jpeg" },
+    { id: 9, nama: "Chocolate", harga: 12000, kat: "non-coffee", img: "chocolate.jpeg" },
+    { id: 10, nama: "Milo", harga: 12000, kat: "non-coffee", img: "milo.jpeg" },
+    { id: 11, nama: "Lychee Tea", harga: 12000, kat: "tea", img: "lecitea.jpeg" },
+    { id: 12, nama: "Lemon Tea", harga: 12000, kat: "tea", img: "lemontea.jpeg" },
+    { id: 13, nama: "Thai Tea", harga: 13000, kat: "tea", img: "thaitea.jpeg" }
+  ];
+
+  let allOrders = [];
+  let allContacts = [];
+  let currentFilter = 'all';
+  let isLocalhost = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+
+  // Format Angka Rupiah
+  function formatRupiah(num) {
+    return 'Rp ' + (num || 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  }
+
+  // Toast Notification
+  function showToast(msg, isSuccess = true) {
+    const toast = document.getElementById('adminToast');
+    const icon = document.getElementById('toastIcon');
+    const text = document.getElementById('toastText');
+    icon.textContent = isSuccess ? '✓' : '⚠️';
+    icon.style.color = isSuccess ? '#34d399' : '#f87171';
+    text.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(() => { toast.classList.remove('show'); }, 3000);
+  }
+
+  // Gatekeeper PIN Check
+  function checkAuth() {
+    const authed = sessionStorage.getItem('glockcore_admin_auth');
+    if (authed === 'true') {
+      document.getElementById('pinModal').style.display = 'none';
+      initDashboard();
+    } else {
+      document.getElementById('pinModal').style.display = 'flex';
+    }
+  }
+
+  function verifyPin() {
+    const input = document.getElementById('inputPin').value.trim();
+    if (input === '121' || input === 'admin121' || input === 'glock121') {
+      sessionStorage.setItem('glockcore_admin_auth', 'true');
+      document.getElementById('pinModal').style.display = 'none';
+      document.getElementById('pinError').style.display = 'none';
+      showToast('Login berhasil!');
+      initDashboard();
+    } else {
+      document.getElementById('pinError').style.display = 'block';
+      document.getElementById('inputPin').value = '';
+      document.getElementById('inputPin').focus();
+    }
+  }
+
+  function logoutAdmin() {
+    sessionStorage.removeItem('glockcore_admin_auth');
+    location.reload();
+  }
+
+  // Inisialisasi Dashboard
+  function initDashboard() {
+    // Tampilkan status environment
+    const envText = document.getElementById('envText');
+    if (isLocalhost) {
+      envText.innerHTML = 'Mode: <strong>Localhost (MySQL)</strong>';
+    } else {
+      envText.innerHTML = 'Mode: <strong>Cloudflare Pages (Cloud)</strong>';
+    }
+
+    renderMenuCatalog();
+    populateManualMenuOptions();
+    loadOrders();
+    loadContacts();
+  }
+
+  // Tab Navigation
+  function switchTab(tab) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.content-box').forEach(c => c.style.display = 'none');
+
+    if (tab === 'pesanan') {
+      document.querySelector(`.tab-btn:nth-child(1)`).classList.add('active');
+      document.getElementById('tab-pesanan').style.display = 'block';
+    } else if (tab === 'menu') {
+      document.querySelector(`.tab-btn:nth-child(2)`).classList.add('active');
+      document.getElementById('tab-menu').style.display = 'block';
+    } else if (tab === 'kontak') {
+      document.querySelector(`.tab-btn:nth-child(3)`).classList.add('active');
+      document.getElementById('tab-kontak').style.display = 'block';
+    }
+  }
+
+  // Muat Pesanan (Dual Mode: Localhost API vs Cloudflare LocalStorage)
+  function loadOrders() {
+    if (isLocalhost) {
+      // Ambil dari MySQL
+      fetch('api/get_pesanan.php')
+        .then(res => res.json())
+        .then(res => {
+          if (res.success) {
+            allOrders = res.data;
+            updateStatsFromData(res.stats);
+            renderOrdersTable();
+          } else {
+            fallbackLoadLocalStorage();
+          }
+        })
+        .catch(() => {
+          fallbackLoadLocalStorage();
+        });
+    } else {
+      fallbackLoadLocalStorage();
+    }
+  }
+
+  function fallbackLoadLocalStorage() {
+    try {
+      let stored = JSON.parse(localStorage.getItem('glockcore_orders') || '[]');
+      if (!stored.length) {
+        // Contoh data awal jika masih kosong
+        stored = [
+          {
+            id: 'GC1024',
+            created_at: new Date(Date.now() - 3600000 * 2).toISOString(),
+            nama: 'Andi Pratama',
+            no_hp: '082298663371',
+            menu_nama: 'Caramel Machiato',
+            harga: 15000,
+            jumlah: 2,
+            total: 30000,
+            catatan: 'Es pisah, less sugar',
+            status: 'baru'
+          },
+          {
+            id: 'GC1023',
+            created_at: new Date(Date.now() - 3600000 * 5).toISOString(),
+            nama: 'Siti Rahma',
+            no_hp: '081234567890',
+            menu_nama: 'Butterscotch',
+            harga: 17000,
+            jumlah: 1,
+            total: 17000,
+            catatan: 'Dine In',
+            status: 'diproses'
+          },
+          {
+            id: 'GC1022',
+            created_at: new Date(Date.now() - 3600000 * 24).toISOString(),
+            nama: 'Budi Santoso',
+            no_hp: '085211223344',
+            menu_nama: 'WHITE MAGz Kopi Susu',
+            harga: 13000,
+            jumlah: 3,
+            total: 39000,
+            catatan: 'Cup dingin',
+            status: 'selesai'
+          }
+        ];
+        localStorage.setItem('glockcore_orders', JSON.stringify(stored));
+      }
+      allOrders = stored;
+      calculateStatsFromLocalStorage();
+      renderOrdersTable();
+    } catch (e) {
+      allOrders = [];
+      renderOrdersTable();
+    }
+  }
+
+  function calculateStatsFromLocalStorage() {
+    const total = allOrders.length;
+    const baru = allOrders.filter(o => o.status === 'baru').length;
+    const selesai = allOrders.filter(o => o.status === 'selesai').length;
+    const omset = allOrders.reduce((sum, o) => o.status !== 'dibatalkan' ? sum + Number(o.total || 0) : sum, 0);
+
+    updateStatsDisplay({
+      total_pesanan: total,
+      total_baru: baru,
+      total_selesai: selesai,
+      total_omset: omset
+    });
+  }
+
+  function updateStatsFromData(stats) {
+    if (!stats) return;
+    updateStatsDisplay({
+      total_pesanan: stats.total_pesanan || allOrders.length,
+      total_baru: stats.total_baru || 0,
+      total_selesai: stats.total_selesai || 0,
+      total_omset: stats.total_omset || 0
+    });
+  }
+
+  function updateStatsDisplay(s) {
+    document.getElementById('statTotalPesanan').textContent = s.total_pesanan;
+    document.getElementById('statPesananBaru').textContent = s.total_baru;
+    document.getElementById('statPesananSelesai').textContent = s.total_selesai;
+    document.getElementById('statTotalOmset').textContent = formatRupiah(s.total_omset);
+    document.getElementById('badgePesananCount').textContent = s.total_pesanan;
+  }
+
+  // Filter & Search Orders
+  function setFilterStatus(status) {
+    currentFilter = status;
+    document.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    renderOrdersTable();
+  }
+
+  function filterOrders() {
+    renderOrdersTable();
+  }
+
+  // Render Tabel Pesanan
+  function renderOrdersTable() {
+    const query = (document.getElementById('orderSearch').value || '').toLowerCase();
+    const tbody = document.getElementById('ordersTableBody');
+    const emptyBox = document.getElementById('ordersEmpty');
+
+    let filtered = allOrders.filter(o => {
+      const matchStatus = (currentFilter === 'all') || (o.status === currentFilter);
+      const matchQuery = !query || 
+        (String(o.id).toLowerCase().includes(query)) ||
+        ((o.nama || '').toLowerCase().includes(query)) ||
+        ((o.no_hp || '').toLowerCase().includes(query)) ||
+        ((o.menu_nama || '').toLowerCase().includes(query));
+      return matchStatus && matchQuery;
+    });
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = '';
+      emptyBox.style.display = 'block';
+      return;
+    }
+
+    emptyBox.style.display = 'none';
+    let html = '';
+
+    filtered.forEach(o => {
+      const dateStr = formatDateTime(o.created_at || o.waktu);
+      const waNumber = cleanPhoneNumber(o.no_hp);
+      const waChatUrl = waNumber ? `https://wa.me/${waNumber}?text=${encodeURIComponent(`Halo kak ${o.nama}, kami dari Glockcore 121 ingin konfirmasi pesanan #${o.id}.`)}` : '#';
+
+      html += `
+        <tr>
+          <td style="font-weight:700; color:#a1a1aa;">#${o.id}</td>
+          <td style="color:#71717a; font-size:0.8rem; white-space:nowrap;">${dateStr}</td>
+          <td style="font-weight:600; color:#fff;">${escapeHtml(o.nama)}</td>
+          <td>
+            ${waNumber ? `
+              <a href="${waChatUrl}" target="_blank" class="wa-link" title="Chat WhatsApp Pelanggan">
+                💬 ${escapeHtml(o.no_hp)}
+              </a>
+            ` : `<span style="color:#71717a;">${escapeHtml(o.no_hp || '-')}</span>`}
+          </td>
+          <td>
+            <div style="font-weight:600; color:#fff;">${escapeHtml(o.menu_nama || o.menu || '-')}</div>
+            <div style="font-size:0.78rem; color:#71717a;">${o.jumlah}x @ ${formatRupiah(o.harga)}</div>
+          </td>
+          <td style="font-weight:700; color:#34d399; white-space:nowrap;">${formatRupiah(o.total)}</td>
+          <td style="color:#a1a1aa; font-size:0.8rem; max-width:200px;">${escapeHtml(o.catatan || '-')}</td>
+          <td>
+            <select class="status-select" onchange="ubahStatusPesanan('${o.id}', this.value)">
+              <option value="baru" ${o.status === 'baru' ? 'selected' : ''}>Baru</option>
+              <option value="diproses" ${o.status === 'diproses' ? 'selected' : ''}>Diproses</option>
+              <option value="selesai" ${o.status === 'selesai' ? 'selected' : ''}>Selesai</option>
+              <option value="dibatalkan" ${o.status === 'dibatalkan' ? 'selected' : ''}>Batal</option>
+            </select>
+          </td>
+          <td>
+            <div style="display:flex; gap:6px;">
+              <button onclick="hapusPesanan('${o.id}')" class="btn btn-danger" style="padding:4px 8px; font-size:0.75rem;" title="Hapus">
+                ✕
+              </button>
+            </div>
+          </td>
+        </tr>
+      `;
+    });
+
+    tbody.innerHTML = html;
+  }
+
+  // Ubah Status Pesanan
+  function ubahStatusPesanan(id, newStatus) {
+    if (isLocalhost) {
+      fetch('api/update_pesanan.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'update_status', id: id, status: newStatus })
+      })
+      .then(res => res.json())
+      .then(res => {
+        if (res.success) {
+          showToast(`Status #${id} diubah jadi ${newStatus}`);
+          loadOrders();
+        } else {
+          updateLocalStatus(id, newStatus);
+        }
+      })
+      .catch(() => updateLocalStatus(id, newStatus));
+    } else {
+      updateLocalStatus(id, newStatus);
+    }
+  }
+
+  function updateLocalStatus(id, newStatus) {
+    const item = allOrders.find(o => String(o.id) === String(id));
+    if (item) {
+      item.status = newStatus;
+      saveOrdersToLocalStorage();
+      calculateStatsFromLocalStorage();
+      renderOrdersTable();
+      showToast(`Status #${id} berhasil diubah!`);
+    }
+  }
+
+  // Hapus Pesanan
+  function hapusPesanan(id) {
+    if (!confirm(`Yakin ingin menghapus pesanan #${id}?`)) return;
+
+    if (isLocalhost) {
+      fetch('api/update_pesanan.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'delete', id: id })
+      })
+      .then(res => res.json())
+      .then(res => {
+        if (res.success) {
+          showToast(`Pesanan #${id} berhasil dihapus`);
+          loadOrders();
+        } else {
+          deleteLocalOrder(id);
+        }
+      })
+      .catch(() => deleteLocalOrder(id));
+    } else {
+      deleteLocalOrder(id);
+    }
+  }
+
+  function deleteLocalOrder(id) {
+    allOrders = allOrders.filter(o => String(o.id) !== String(id));
+    saveOrdersToLocalStorage();
+    calculateStatsFromLocalStorage();
+    renderOrdersTable();
+    showToast(`Pesanan #${id} dihapus`);
+  }
+
+  function saveOrdersToLocalStorage() {
+    try {
+      localStorage.setItem('glockcore_orders', JSON.stringify(allOrders));
+    } catch(e) {}
+  }
+
+  // Modal Pesanan Manual / Kasir
+  function bukaModalManual() {
+    document.getElementById('manualOrderModal').style.display = 'flex';
+    updateManualHarga();
+  }
+
+  function tutupModalManual() {
+    document.getElementById('manualOrderModal').style.display = 'none';
+  }
+
+  function populateManualMenuOptions() {
+    const select = document.getElementById('m-menu');
+    select.innerHTML = MASTER_MENUS.map(m => `
+      <option value="${m.id}" data-harga="${m.harga}">${m.nama} — ${formatRupiah(m.harga)}</option>
+    `).join('');
+  }
+
+  function updateManualHarga() {
+    const select = document.getElementById('m-menu');
+    const selected = select.options[select.selectedIndex];
+    const harga = parseInt(selected.getAttribute('data-harga')) || 0;
+    const qty = parseInt(document.getElementById('m-jumlah').value) || 1;
+    document.getElementById('m-total').value = formatRupiah(harga * qty);
+  }
+
+  function simpanPesananManual() {
+    const select = document.getElementById('m-menu');
+    const menuId = parseInt(select.value);
+    const menuObj = MASTER_MENUS.find(m => m.id === menuId) || MASTER_MENUS[0];
+    const nama = document.getElementById('m-nama').value.trim();
+    const noHp = document.getElementById('m-nohp').value.trim() || '-';
+    const jumlah = parseInt(document.getElementById('m-jumlah').value) || 1;
+    const catatan = document.getElementById('m-catatan').value.trim() || 'Pesanan Kasir Walk-in';
+    const total = menuObj.harga * jumlah;
+
+    if (!nama) {
+      alert('Nama pelanggan wajib diisi!');
+      return;
+    }
+
+    if (isLocalhost) {
+      fetch('api/submit_pesanan.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          menu_id: menuId,
+          menu_nama: menuObj.nama,
+          nama: nama,
+          no_hp: noHp,
+          jumlah: jumlah,
+          catatan: catatan
+        })
+      })
+      .then(res => res.json())
+      .then(res => {
+        if (res.success) {
+          showToast(`Pesanan manual #${res.pesanan_id} tersimpan!`);
+          tutupModalManual();
+          document.getElementById('manualOrderForm').reset();
+          loadOrders();
+        } else {
+          simpanManualLocal(menuObj, nama, noHp, jumlah, total, catatan);
+        }
+      })
+      .catch(() => simpanManualLocal(menuObj, nama, noHp, jumlah, total, catatan));
+    } else {
+      simpanManualLocal(menuObj, nama, noHp, jumlah, total, catatan);
+    }
+  }
+
+  function simpanManualLocal(menuObj, nama, noHp, jumlah, total, catatan) {
+    const newId = 'GC' + Math.floor(1000 + Math.random() * 9000);
+    const newOrder = {
+      id: newId,
+      created_at: new Date().toISOString(),
+      nama: nama,
+      no_hp: noHp,
+      menu_id: menuObj.id,
+      menu_nama: menuObj.nama,
+      harga: menuObj.harga,
+      jumlah: jumlah,
+      total: total,
+      catatan: catatan,
+      status: 'diproses'
+    };
+
+    allOrders.unshift(newOrder);
+    saveOrdersToLocalStorage();
+    calculateStatsFromLocalStorage();
+    renderOrdersTable();
+    tutupModalManual();
+    document.getElementById('manualOrderForm').reset();
+    showToast(`Pesanan manual #${newId} berhasil ditambahkan!`);
+  }
+
+  // Export CSV
+  function exportOrdersCsv() {
+    if (!allOrders.length) {
+      alert('Tidak ada data pesanan untuk diexport.');
+      return;
+    }
+
+    let csv = "ID,Tanggal,Nama,No HP,Menu,Qty,Harga,Total,Catatan,Status\n";
+    allOrders.forEach(o => {
+      csv += `"${o.id}","${o.created_at || o.waktu || ''}","${(o.nama||'').replace(/"/g, '""')}","${o.no_hp || ''}","${(o.menu_nama || o.menu || '').replace(/"/g, '""')}",${o.jumlah},${o.harga},${o.total},"${(o.catatan || '').replace(/"/g, '""')}","${o.status}"\n`;
+    });
+
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `pesanan_glockcore121_${new Date().toISOString().slice(0,10)}.csv`;
+    a.click();
+    showToast('Data pesanan berhasil diexport ke CSV!');
+  }
+
+  // Render Katalog Menu
+  function renderMenuCatalog() {
+    const container = document.getElementById('menuAdminGrid');
+    container.innerHTML = MASTER_MENUS.map(m => `
+      <div class="menu-admin-card">
+        <img src="${m.img}" alt="${m.nama}" class="menu-admin-img" onerror="this.src='logo.jpeg'">
+        <div class="menu-admin-info">
+          <div class="menu-admin-cat">${m.kat}</div>
+          <div class="menu-admin-title" title="${m.nama}">${m.nama}</div>
+          <div class="menu-admin-price">${formatRupiah(m.harga)}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Muat Pesan Kontak
+  function loadContacts() {
+    const tbody = document.getElementById('kontakTableBody');
+    const emptyBox = document.getElementById('kontakEmpty');
+    
+    // Sample / Stored contacts
+    let contacts = [];
+    try {
+      contacts = JSON.parse(localStorage.getItem('glockcore_contacts') || '[]');
+      if (!contacts.length) {
+        contacts = [
+          {
+            waktu: new Date(Date.now() - 3600000 * 12).toISOString(),
+            nama: 'Rian Hidayat',
+            email: 'rian@gmail.com',
+            subjek: 'Reservasi Tempat Acara',
+            pesan: 'Halo kak, apakah bisa booking kedai lantai 2 untuk komunitas kopi hari Sabtu depan?'
+          }
+        ];
+      }
+    } catch(e) {}
+
+    document.getElementById('badgeKontakCount').textContent = contacts.length;
+
+    if (!contacts.length) {
+      tbody.innerHTML = '';
+      emptyBox.style.display = 'block';
+      return;
+    }
+
+    emptyBox.style.display = 'none';
+    tbody.innerHTML = contacts.map(c => `
+      <tr>
+        <td style="color:#71717a; font-size:0.8rem; white-space:nowrap;">${formatDateTime(c.waktu)}</td>
+        <td style="font-weight:600; color:#fff;">${escapeHtml(c.nama)}</td>
+        <td><a href="mailto:${c.email}" style="color:#60a5fa; text-decoration:none;">${escapeHtml(c.email)}</a></td>
+        <td style="font-weight:600; color:#e4e4e7;">${escapeHtml(c.subjek)}</td>
+        <td style="color:#a1a1aa; font-size:0.82rem; max-width:300px;">${escapeHtml(c.pesan)}</td>
+        <td>
+          <a href="mailto:${c.email}?subject=Balasan: ${encodeURIComponent(c.subjek)}" class="btn btn-dark" style="padding:4px 8px; font-size:0.75rem;">
+            ✉️ Balas
+          </a>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  // Helpers
+  function formatDateTime(dtStr) {
+    if (!dtStr) return '-';
+    try {
+      const d = new Date(dtStr);
+      if (isNaN(d.getTime())) return dtStr;
+      const pad = n => (n < 10 ? '0' : '') + n;
+      return `${pad(d.getDate())}/${pad(d.getMonth() + 1)} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+    } catch (e) {
+      return dtStr;
+    }
+  }
+
+  function cleanPhoneNumber(no) {
+    if (!no) return '';
+    let clean = no.replace(/[^0-9]/g, '');
+    if (clean.startsWith('0')) clean = '62' + clean.slice(1);
+    return clean;
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  // Jalankan saat halaman dibuka
+  document.addEventListener('DOMContentLoaded', checkAuth);
+  </script>
+</body>
+</html>
