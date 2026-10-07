@@ -684,6 +684,27 @@
         localStorage.setItem('glockcore_orders', JSON.stringify(riwayat.slice(0, 50)));
       } catch (err) {}
 
+      // Kirim pesanan ke ntfy.sh untuk sinkronisasi real-time dengan Admin Dashboard
+      try {
+        var orderPayload = JSON.stringify({
+          id: orderCode,
+          waktu: new Date().toISOString(),
+          nama: nama,
+          no_hp: noHp,
+          menu_nama: menuNama,
+          harga: menuHarga,
+          jumlah: jumlah,
+          total: menuHarga * jumlah,
+          catatan: catatan,
+          status: 'baru'
+        });
+        fetch('https://ntfy.sh/glockcore121_orders_xk9m', {
+          method: 'POST',
+          body: orderPayload,
+          headers: { 'Content-Type': 'text/plain' }
+        }).catch(function() {});
+      } catch (ntfyErr) {}
+
       var directWaUrl = buatWhatsAppUrl(nama, noHp, menuNama, menuHarga, jumlah, catatan, orderCode);
       prosesBukaWa(directWaUrl, orderCode, null);
       $('#btn-pesan-text').text('Konfirmasi Pesanan');

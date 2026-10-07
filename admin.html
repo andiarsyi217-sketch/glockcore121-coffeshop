@@ -912,13 +912,108 @@
     if (isLocalhost) {
       envText.innerHTML = 'Mode: <strong>Localhost (MySQL)</strong>';
     } else {
-      envText.innerHTML = 'Mode: <strong>Cloudflare Pages (Cloud)</strong>';
+      envText.innerHTML = 'Mode: <strong>Cloudflare Pages (Cloud + ntfy.sh)</strong>';
     }
 
     renderMenuCatalog();
     populateManualMenuOptions();
     loadOrders();
     loadContacts();
+
+    // Jika di Cloudflare Pages → aktifkan sinkronisasi real-time via ntfy.sh
+    if (!isLocalhost) {
+      startNtfySync();
+    }
+  }
+
+  // Konstanta topic ntfy.sh
+  const NTFY_TOPIC = 'glockcore121_orders_xk9m';
+
+  // Tambahkan pesanan dari ntfy.sh ke allOrders (hindari duplikat)
+  function mergeNtfyOrder(order) {
+    if (!order || !order.id) return;
+    const exists = allOrders.some(o => String(o.id) === String(order.id));
+    if (!exists) {
+      // Pastikan field konsisten
+      const normalized = {
+        id: order.id,
+        created_at: order.waktu || order.created_at || new Date().toISOString(),
+        waktu: order.waktu || order.created_at || new Date().toISOString(),
+        nama: order.nama || '-',
+        no_hp: order.no_hp || '-',
+        menu_nama: order.menu_nama || '-',
+        harga: Number(order.harga) || 0,
+        jumlah: Number(order.jumlah) || 1,
+        total: Number(order.total) || 0,
+        catatan: order.catatan || '',
+        status: order.status || 'baru'
+      };
+      allOrders.unshift(normalized);
+      // Simpan juga ke localStorage sebagai cache
+      try {
+        localStorage.setItem('glockcore_orders', JSON.stringify(allOrders.slice(0, 100)));
+      } catch(e) {}
+      return true; // order baru ditemukan
+    }
+    return false;
+  }
+
+  // Polling ntfy.sh saat pertama load (ambil pesan ~12 jam terakhir)
+  function ntfyInitialPoll() {
+    const since = Math.floor((Date.now() - 12 * 3600 * 1000) / 1000); // 12 jam lalu (unix timestamp)
+    fetch(`https://ntfy.sh/${NTFY_TOPIC}/json?poll=1&since=${since}`)
+      .then(res => res.text())
+      .then(text => {
+        const lines = text.trim().split('\n').filter(l => l.trim());
+        let hasNew = false;
+        lines.forEach(line => {
+          try {
+            const evt = JSON.parse(line);
+            if (evt.message) {
+              const order = JSON.parse(evt.message);
+              if (mergeNtfyOrder(order)) hasNew = true;
+            }
+          } catch(e) {}
+        });
+        if (hasNew) {
+          calculateStatsFromLocalStorage();
+          renderOrdersTable();
+          showToast(`📦 Pesanan dimuat dari cloud!`);
+        }
+      })
+      .catch(() => {});
+  }
+
+  // Subscribe SSE ntfy.sh untuk notifikasi real-time pesanan baru
+  function startNtfySync() {
+    ntfyInitialPoll();
+
+    let evtSource;
+    function connectSSE() {
+      evtSource = new EventSource(`https://ntfy.sh/${NTFY_TOPIC}/sse`);
+      evtSource.onmessage = function(e) {
+        try {
+          const evt = JSON.parse(e.data);
+          if (evt.event === 'message' && evt.message) {
+            const order = JSON.parse(evt.message);
+            const isNew = mergeNtfyOrder(order);
+            if (isNew) {
+              calculateStatsFromLocalStorage();
+              renderOrdersTable();
+              showToast(`🔔 Pesanan baru: ${order.nama} — ${order.menu_nama}`, true);
+              // Suara notifikasi (opsional, browser yang mendukung)
+              try { new Audio('https://www.soundjay.com/buttons/button-16.mp3').play(); } catch(e) {}
+            }
+          }
+        } catch(e) {}
+      };
+      evtSource.onerror = function() {
+        evtSource.close();
+        // Reconnect setelah 10 detik jika koneksi terputus
+        setTimeout(connectSSE, 10000);
+      };
+    }
+    connectSSE();
   }
 
   // Tab Navigation
